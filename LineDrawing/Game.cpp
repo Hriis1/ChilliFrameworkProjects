@@ -42,4 +42,10 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+
+	for (int x = 0; x < Graphics::ScreenWidth; x++)
+	{
+		const float y = 0.4f * (float)x + 200;
+		gfx.PutPixel(x, (int)y, Colors::White);
+	}
 }

@@ -22,7 +22,7 @@
 #include "Game.h"
 #include "ChiliException.h"
 
-int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR pArgs,INT )
+int WINAPI main( HINSTANCE hInst,HINSTANCE,LPWSTR pArgs,INT )
 {
 	try
 	{
