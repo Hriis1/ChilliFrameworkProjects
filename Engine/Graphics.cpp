@@ -318,18 +318,40 @@ void Graphics::PutPixel( int x,int y,Color c )
 
 void Graphics::drawLine(Vec2<int> pt0, Vec2<int> pt1, const Color c)
 {
-	if (pt0._x > pt1._x)
+	float k;
+	if (pt0._x != pt1._x)
 	{
-		std::swap(pt0, pt1);
+		k = float(pt1._y - pt0._y) / float(pt1._x - pt0._x);
 	}
 
-	float k = float(pt1._y - pt0._y) / float(pt1._x - pt0._x);
-	float b = pt0._y - k * pt0._x;
-
-	for (int x = (int)pt0._x; x < (int)pt1._x; x++)
+	if (pt0._x != pt1._x && std::abs(k) <= 1.0f)
 	{
-		const float y = k * (float)x + b;
-		PutPixel(x, (int)y, c);
+		if (pt0._x > pt1._x)
+		{
+			std::swap(pt0, pt1);
+		}
+		float b = pt0._y - k * pt0._x;
+
+		for (int x = (int)pt0._x; x < (int)pt1._x; x++)
+		{
+			const float y = k * (float)x + b;
+			PutPixel(x, (int)y, c);
+		}
+	}
+	else
+	{
+		if (pt0._y > pt1._y)
+		{
+			std::swap(pt0, pt1);
+		}
+		const float w = float(pt1._x - pt0._x) / float(pt1._y - pt0._y);
+		const float p = pt0._x - w * pt0._y;
+
+		for (int y = (int)pt0._y; y < (int)pt1._y; y++)
+		{
+			const float x = w * (float)y + p;
+			PutPixel(x, (int)y, c);
+		}
 	}
 }
 
