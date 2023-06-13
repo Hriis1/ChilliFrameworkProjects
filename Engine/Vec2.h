@@ -13,6 +13,11 @@ public:
 		: _x(x), _y(y)
 	{
 	}
+	Vec2(const Vec2& other)
+	{
+		_x = other._x;
+		_y = other._y;
+	}
 
 	template<typename Type>
 	explicit Vec2(const Vec2<Type>& other)
@@ -44,6 +49,18 @@ public:
 	}
 
 	//operators
+	bool operator==(const Vec2& other) const
+	{
+		return _x == other._x && _y == other._y;
+	}
+
+	bool operator!=(const Vec2& other) const
+	{
+		return !(operator==(other));
+	}
+
+
+
 	Vec2 operator+(const Vec2& other) const
 	{
 		return Vec2(_x + other._x, _y + other._y);
@@ -58,6 +75,16 @@ public:
 	Vec2 operator-(const Vec2& other) const
 	{
 		return Vec2(_x - other._x, _y - other._y);
+	}
+
+	Vec2& operator=(const Vec2& other)
+	{
+		if (this != &other)
+		{
+			_x = other._x;
+			_y = other._y;
+		}
+		return *this;
 	}
 
 	Vec2& operator-=(const Vec2& other)

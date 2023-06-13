@@ -42,10 +42,6 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-
-	for (int x = 0; x < Graphics::ScreenWidth; x++)
-	{
-		const float y = 0.4f * (float)x + 200;
-		gfx.PutPixel(x, (int)y, Colors::White);
-	}
+	if(wnd.mouse.LeftIsPressed())
+		gfx.drawLine(Vec2<int>(100, 100), Vec2<int>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
 }
