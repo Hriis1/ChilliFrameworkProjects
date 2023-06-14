@@ -335,7 +335,8 @@ void Graphics::drawLine(Vec2<int> pt0, Vec2<int> pt1, const Color c)
 		for (int x = (int)pt0._x; x < (int)pt1._x; x++)
 		{
 			const float y = k * (float)x + b;
-			PutPixel(x, (int)y, c);
+			if (x >= 0 && x < ScreenWidth && y >= 0 && y < ScreenHeight)
+				PutPixel(x, (int)y, c);
 		}
 	}
 	else
@@ -350,7 +351,8 @@ void Graphics::drawLine(Vec2<int> pt0, Vec2<int> pt1, const Color c)
 		for (int y = (int)pt0._y; y < (int)pt1._y; y++)
 		{
 			const float x = w * (float)y + p;
-			PutPixel(x, (int)y, c);
+			if (x >= 0 && x < ScreenWidth && y >= 0 && y < ScreenHeight)
+				PutPixel(x, (int)y, c);
 		}
 	}
 }
