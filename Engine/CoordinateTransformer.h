@@ -15,6 +15,8 @@ public:
 		Vec2<int> offset(gfx.ScreenWidth / 2, gfx.ScreenHeight / 2);
 		for (auto& vert : poly)
 		{
+			//Translate the shape so it behaves like its in a mathematical coordinate system
+			vert._y *= -1;
 			vert += offset;
 		}
 		gfx.drawPolyLine(poly, c);

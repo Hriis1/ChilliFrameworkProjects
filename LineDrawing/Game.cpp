@@ -48,10 +48,10 @@ void Game::ComposeFrame()
 		gfx.drawLine(Vec2<int>(100, 100), Vec2<int>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
 
 	auto star = ShapeMaker::makeStar(150, 75);
-	/*for (auto& vert : star)
+	for (auto& vert : star)
 	{
 		vert += Vec2<int>(200, 200);
-	}*/
+	}
 
 	_coordTrans.drawPolyLine(star, Colors::Red);
 }
