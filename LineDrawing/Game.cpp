@@ -26,7 +26,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	_coordTrans(gfx)
+	_coordTrans(gfx), _e1(ShapeMaker::makeStar(150, 75))
 {
 }
 
@@ -40,6 +40,23 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const int speed = 3;
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		_e1.translateBy({0, -speed});
+	}
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		_e1.translateBy({0, speed});
+	}
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		_e1.translateBy({-speed, 0});
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		_e1.translateBy({speed, 0 });
+	}
 }
 
 void Game::ComposeFrame()
@@ -47,11 +64,6 @@ void Game::ComposeFrame()
 	if(wnd.mouse.LeftIsPressed())
 		gfx.drawLine(Vec2<int>(100, 100), Vec2<int>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
 
-	auto star = ShapeMaker::makeStar(150, 75);
-	for (auto& vert : star)
-	{
-		vert += Vec2<int>(200, 200);
-	}
 
-	_coordTrans.drawPolyLine(star, Colors::Red);
+	_coordTrans.drawPolyLine(_e1.getPolyLine(), Colors::Red);
 }
