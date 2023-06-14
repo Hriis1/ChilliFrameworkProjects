@@ -355,6 +355,15 @@ void Graphics::drawLine(Vec2<int> pt0, Vec2<int> pt1, const Color c)
 	}
 }
 
+void Graphics::drawPolyLine(const std::vector<Vec2<int>>& verts, Color c)
+{
+	for (size_t i = 0; i < verts.size() - 1; i++)
+	{
+		drawLine(verts[i], verts[i + 1], c);
+	}
+	drawLine(verts.back(), verts.front(), c);
+}
+
 
 //////////////////////////////////////////////////
 //           Graphics Exception

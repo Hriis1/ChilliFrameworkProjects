@@ -44,4 +44,6 @@ void Game::ComposeFrame()
 {
 	if(wnd.mouse.LeftIsPressed())
 		gfx.drawLine(Vec2<int>(100, 100), Vec2<int>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
+
+	gfx.drawPolyLine({ {10, 10},{200, 10},{10, 100} }, Colors::Red);
 }
