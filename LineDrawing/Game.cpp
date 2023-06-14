@@ -46,5 +46,11 @@ void Game::ComposeFrame()
 	if(wnd.mouse.LeftIsPressed())
 		gfx.drawLine(Vec2<int>(100, 100), Vec2<int>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
 
-	gfx.drawPolyLine(ShapeMaker::makeStar(150,75), Colors::Red);
+	auto star = ShapeMaker::makeStar(150, 75);
+	for (auto& vert : star)
+	{
+		vert += Vec2<int>(200, 200);
+	}
+
+	gfx.drawPolyLine(star, Colors::Red);
 }
