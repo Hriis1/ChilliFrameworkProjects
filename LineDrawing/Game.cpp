@@ -57,12 +57,22 @@ void Game::UpdateModel()
 	{
 		_e1.translateBy({speed, 0 });
 	}
+
+	while (!wnd.mouse.IsEmpty())
+	{
+		const auto e = wnd.mouse.Read();
+
+		if (e.GetType() == Mouse::Event::Type::WheelUp)
+			_e1.setScale(_e1.getScale() * 1.1f);
+		else if(e.GetType() == Mouse::Event::Type::WheelDown)
+			_e1.setScale(_e1.getScale() * 0.9f);
+	}
 }
 
 void Game::ComposeFrame()
 {
 	if(wnd.mouse.LeftIsPressed())
-		gfx.drawLine(Vec2<int>(100, 100), Vec2<int>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
+		gfx.drawLine(Vec2<float>(100, 100), Vec2<float>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
 
 
 	_coordTrans.drawPolyLine(_e1.getPolyLine(), Colors::Red);

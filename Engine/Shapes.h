@@ -5,9 +5,9 @@
 class ShapeMaker
 {
 public:
-	static std::vector<Vec2<int>> makeStar(int outerRadius, int innerRadius, int nFlares = 5)
+	static std::vector<Vec2<float>> makeStar(int outerRadius, int innerRadius, int nFlares = 5)
 	{
-		std::vector<Vec2<int>> star;
+		std::vector<Vec2<float>> star;
 		star.reserve(nFlares * 2);
 		const float dTheta = 2.0f * 3.14159f / float(nFlares * 2);
 		for (int i = 0; i < nFlares * 2; i++)

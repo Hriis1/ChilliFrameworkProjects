@@ -59,8 +59,8 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
-	void drawLine(Vec2<int> pt0, Vec2<int> pt1, const Color c);
-	void drawPolyLine(const std::vector<Vec2<int>>& verts, Color c);
+	void drawLine(Vec2<float> pt0, Vec2<float> pt1, const Color c);
+	void drawPolyLine(const std::vector<Vec2<float>>& verts, Color c);
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

@@ -10,9 +10,9 @@ public:
 		:
 		gfx(gfx)
 	{}
-	void drawPolyLine(std::vector<Vec2<int>> poly, Color c)
+	void drawPolyLine(std::vector<Vec2<float>> poly, Color c)
 	{
-		Vec2<int> offset(gfx.ScreenWidth / 2, gfx.ScreenHeight / 2);
+		Vec2<float> offset((float)gfx.ScreenWidth / 2.0f, (float)gfx.ScreenHeight / 2.0f);
 		for (auto& vert : poly)
 		{
 			//Translate the shape so it behaves like its in a mathematical coordinate system

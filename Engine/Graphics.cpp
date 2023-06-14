@@ -316,7 +316,7 @@ void Graphics::PutPixel( int x,int y,Color c )
 	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
 }
 
-void Graphics::drawLine(Vec2<int> pt0, Vec2<int> pt1, const Color c)
+void Graphics::drawLine(Vec2<float> pt0, Vec2<float> pt1, const Color c)
 {
 	float k;
 	if (pt0._x != pt1._x)
@@ -357,7 +357,7 @@ void Graphics::drawLine(Vec2<int> pt0, Vec2<int> pt1, const Color c)
 	}
 }
 
-void Graphics::drawPolyLine(const std::vector<Vec2<int>>& verts, Color c)
+void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, Color c)
 {
 	for (size_t i = 0; i < verts.size() - 1; i++)
 	{
