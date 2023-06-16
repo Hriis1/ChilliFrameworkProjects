@@ -5,7 +5,7 @@
 class ShapeMaker
 {
 public:
-	static std::vector<Vec2<float>> makeStar(int outerRadius, int innerRadius, int nFlares = 5)
+	static std::vector<Vec2<float>> makeStar(float outerRadius, float innerRadius, int nFlares = 5)
 	{
 		std::vector<Vec2<float>> star;
 		star.reserve(nFlares * 2);

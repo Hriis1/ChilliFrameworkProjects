@@ -46,5 +46,5 @@ private:
 	/*  User Variables              */
 	/********************************/
 	CoordinateTransformer _coordTrans;
-	Entity _e1;
+	std::vector<Entity> _entities;
 };

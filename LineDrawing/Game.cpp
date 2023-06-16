@@ -26,8 +26,15 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	_coordTrans(gfx), _e1(ShapeMaker::makeStar(150, 75))
+	_coordTrans(gfx)
 {
+	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(460.0f, 0.0f));
+	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(150.0f, 300.0f));
+	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(250.0f, -200.0f));
+	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(-250.0f, 200.0f));
+	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(0.0f, 0.0f));
+	_entities.emplace_back(ShapeMaker::makeStar(200.0f, 50.0f), Vec2<float>(-150.0f, -300.0f));
+	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(400.0f, 300.0f));
 }
 
 void Game::Go()
@@ -40,7 +47,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	const int speed = 3;
+	/*const int speed = 3;
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
 		_e1.translateBy({0, -speed});
@@ -66,7 +73,7 @@ void Game::UpdateModel()
 			_e1.setScale(_e1.getScale() * 1.1f);
 		else if(e.GetType() == Mouse::Event::Type::WheelDown)
 			_e1.setScale(_e1.getScale() * 0.9f);
-	}
+	}*/
 }
 
 void Game::ComposeFrame()
@@ -75,5 +82,9 @@ void Game::ComposeFrame()
 		gfx.drawLine(Vec2<float>(100, 100), Vec2<float>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
 
 
-	_coordTrans.drawPolyLine(_e1.getPolyLine(), Colors::Red);
+	
+	for (auto& e : _entities)
+	{
+		_coordTrans.drawPolyLine(e.getPolyLine(), Colors::Red);
+	}
 }
