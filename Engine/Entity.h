@@ -11,6 +11,11 @@ public:
 	{
 
 	}
+	Entity(const std::vector<Vec2<float>>& model, const Vec2<float>& pos)
+		: _model(model), _pos(pos)
+	{
+
+	}
 
 	void translateBy(const Vec2<float> offset)
 	{
@@ -51,8 +56,8 @@ public:
 		_scale = scale;
 	}
 private:
+	std::vector<Vec2<float>> _model;
 	Vec2<float> _pos = { 0.0f, 0.0f };
 	float _scale = 1.0f;
-	std::vector<Vec2<float>> _model;
 };
 
