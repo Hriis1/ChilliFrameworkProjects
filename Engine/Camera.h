@@ -16,8 +16,18 @@ public:
 	{
 		return _pos;
 	}
+	float getScale() const
+	{
+		return _scale;
+	}
+	//setters
+	void setScale(float s)
+	{
+		_scale = s;
+	}
 private:
 	Vec2<float> _pos = {0.0f, 0.0f};
+	float _scale = 1.0f;
 	CoordinateTransformer& _ct;
 };
 

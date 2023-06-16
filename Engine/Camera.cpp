@@ -19,6 +19,7 @@ void Camera::drawPolyLine(std::vector<Vec2<float>> poly, Color c)
 {
 	for (auto& vert : poly)
 	{
+		vert *= _scale;
 		vert -= _pos;
 	}
 	_ct.drawPolyLine(std::move(poly), c);

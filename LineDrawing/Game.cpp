@@ -64,16 +64,16 @@ void Game::UpdateModel()
 	{
 		_e1.translateBy({speed, 0 });
 	}
-
+	*/
 	while (!wnd.mouse.IsEmpty())
 	{
 		const auto e = wnd.mouse.Read();
 
 		if (e.GetType() == Mouse::Event::Type::WheelUp)
-			_e1.setScale(_e1.getScale() * 1.1f);
+			_camera.setScale(_camera.getScale() * 1.1f);
 		else if(e.GetType() == Mouse::Event::Type::WheelDown)
-			_e1.setScale(_e1.getScale() * 0.9f);
-	}*/
+			_camera.setScale(_camera.getScale() * 0.9f);
+	}
 
 	const float cameraSpeed = 3.0f;
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
