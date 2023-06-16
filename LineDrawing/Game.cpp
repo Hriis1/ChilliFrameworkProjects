@@ -26,7 +26,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	_coordTrans(gfx)
+	_coordTrans(gfx), _camera(_coordTrans)
 {
 	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(460.0f, 0.0f));
 	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(150.0f, 300.0f));
@@ -74,6 +74,24 @@ void Game::UpdateModel()
 		else if(e.GetType() == Mouse::Event::Type::WheelDown)
 			_e1.setScale(_e1.getScale() * 0.9f);
 	}*/
+
+	const float cameraSpeed = 3.0f;
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		_camera.moveBy(Vec2<float>(0.0f, -cameraSpeed));
+	}
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		_camera.moveBy(Vec2<float>(0.0f, cameraSpeed));
+	}
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		_camera.moveBy(Vec2<float>(-cameraSpeed, 0.0f));
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		_camera.moveBy(Vec2<float>(cameraSpeed, 0.0f));
+	}
 }
 
 void Game::ComposeFrame()
@@ -85,6 +103,6 @@ void Game::ComposeFrame()
 	
 	for (auto& e : _entities)
 	{
-		_coordTrans.drawPolyLine(e.getPolyLine(), Colors::Red);
+		_camera.drawPolyLine(e.getPolyLine(), Colors::Red);
 	}
 }
