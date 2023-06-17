@@ -20,6 +20,11 @@ bool RectF::isOverlappingWith(const RectF& other) const
 	return right >= other.left && left <= other.right && bot >=other.top && top <= other.bot;
 }
 
+bool RectF::isContainedBy(const RectF& other) const
+{
+	return left >= other.left && right <= other.right && top >= other.top && bot <= other.bot;
+}
+
 RectF RectF::fromCenter(const Vec2<float>& center, float halfWidth, float halfHeight)
 {
 	const Vec2<float> half(halfWidth, halfHeight);
