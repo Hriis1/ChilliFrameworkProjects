@@ -103,12 +103,13 @@ void Game::ComposeFrame()
 	/*if(wnd.mouse.LeftIsPressed())
 		gfx.drawLine(Vec2<float>(100, 100), Vec2<float>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);*/
 
+	const auto viewPort = _camera.getViewportRect();
 	for (const auto& e : _stars)
 	{
 		Drawable dr = e.getDrawable();
 
 		//Draw only the objects that are visible by the camera
-		if(_camera.getViewportRect().isOverlappingWith(e.getBoundingRect()))
+		if(viewPort.isOverlappingWith(e.getBoundingRect()))
 			_camera.draw(dr);
 	}
 }
