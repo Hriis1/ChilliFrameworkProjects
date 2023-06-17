@@ -101,8 +101,9 @@ void Game::ComposeFrame()
 
 
 	
-	for (auto& e : _entities)
+	for (const auto& e : _entities)
 	{
-		_camera.drawPolyLine(e.getPolyLine(), Colors::Red);
+		Drawable dr = e.getDrawable();
+		_camera.draw(dr);
 	}
 }

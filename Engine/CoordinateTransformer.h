@@ -2,25 +2,22 @@
 #include <vector>
 #include "Vec2.h"
 #include "Graphics.h"
+#include "Drawable.h"
 
 class CoordinateTransformer
 {
 public:
 	CoordinateTransformer(Graphics& gfx)
 		:
-		gfx(gfx)
+		_gfx(gfx)
 	{}
-	void drawPolyLine(std::vector<Vec2<float>> poly, Color c)
+	void draw(Drawable& drawable) const
 	{
-		Vec2<float> offset((float)gfx.ScreenWidth / 2.0f, (float)gfx.ScreenHeight / 2.0f);
-		for (auto& vert : poly)
-		{
-			//Translate the shape so it behaves like its in a mathematical coordinate system
-			vert._y *= -1;
-			vert += offset;
-		}
-		gfx.drawPolyLine(poly, c);
+		Vec2<float> offset((float)_gfx.ScreenWidth / 2.0f, (float)_gfx.ScreenHeight / 2.0f);
+		drawable.scaleY(-1.0f);
+		drawable.translate(offset);
+		drawable.Render(_gfx);
 	}
 private:
-	Graphics& gfx;
+	Graphics& _gfx;
 };

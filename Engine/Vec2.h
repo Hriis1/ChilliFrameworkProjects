@@ -77,6 +77,11 @@ public:
 		return Vec2(_x - other._x, _y - other._y);
 	}
 
+	Vec2 operator-() const
+	{
+		return Vec2(-_x, -_y);
+	}
+
 	Vec2& operator=(const Vec2& other)
 	{
 		if (this != &other)

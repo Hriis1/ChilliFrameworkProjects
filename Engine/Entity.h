@@ -6,13 +6,13 @@
 class Entity
 {
 public:
-	Entity(const std::vector<Vec2<float>>& model)
-		: _model(model)
+	Entity(const std::vector<Vec2<float>>& model, Color c = Colors::White)
+		: _model(model), _color(c)
 	{
 
 	}
-	Entity(const std::vector<Vec2<float>>& model, const Vec2<float>& pos)
-		: _model(model), _pos(pos)
+	Entity(const std::vector<Vec2<float>>& model, const Vec2<float>& pos, Color c = Colors::White)
+		: _model(model), _pos(pos), _color(c)
 	{
 
 	}
@@ -33,16 +33,12 @@ public:
 		return _scale;
 	}
 
-	std::vector<Vec2<float>> getPolyLine() const
+	Drawable getDrawable() const
 	{
-		auto poly = _model;
-		for (auto& vert : poly)
-		{
-			vert *= _scale;
-			vert += _pos;
-		}
-
-		return poly;
+		 Drawable drawable(_model, _color);
+		 drawable.scale(_scale);
+		 drawable.translate(_pos);
+		 return drawable;
 	}
 
 	//setters
@@ -59,5 +55,6 @@ private:
 	std::vector<Vec2<float>> _model;
 	Vec2<float> _pos = { 0.0f, 0.0f };
 	float _scale = 1.0f;
+	Color _color;
 };
 

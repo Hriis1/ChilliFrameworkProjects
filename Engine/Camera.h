@@ -8,7 +8,7 @@ public:
 	void moveBy(const Vec2<float>& offset);
 	void moveTo(const Vec2<float>& newPos);
 
-	void drawPolyLine(std::vector<Vec2<float>> poly, Color c);
+	void draw(Drawable& drawable);
 	
 
 	//getters
