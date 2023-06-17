@@ -116,7 +116,7 @@ void Game::ComposeFrame()
 		Drawable dr = e.getDrawable();
 
 		//Draw only the objects that are visible by the camera
-		if(viewPort.isOverlappingWith(e.getBoundingRect()))
+		if(viewPort.isOverlappingWith(e.getMaxBoundingRect()))
 			_camera.draw(dr);
 	}
 }
@@ -142,11 +142,13 @@ void Game::generateStars()
 	std::uniform_int_distribution<int> pointsDist(3, 8);
 	std::uniform_real_distribution<float> colorFreqDist(0.6f, 4.0f);
 	std::uniform_real_distribution<float> phaseDist(0.0f, 2.0f * 3.14f);
+	std::uniform_real_distribution<float> scaleOffsetDist(0.0f, 30.0f);
+	float maxRadiusChange = 0.6f;
 
-	const Color colors[] = { Colors::Red,Colors::White,Colors::Blue,Colors::Cyan,Colors::Yellow,Colors::Magenta,Colors::Green };
+	const Color colors[] = { Colors::Red,Colors::Blue,Colors::Cyan,Colors::Yellow,Colors::Magenta,Colors::Green };
 	std::uniform_int_distribution<size_t> colorSampler(0, std::end(colors) - std::begin(colors));
 
-	while(_stars.size() < 200)
+	while(_stars.size() < 100)
 	{
 		Vec2<float> pos = Vec2<float>(xDist(_rng), yDist(_rng));
 		float outerRad = outerRDist(_rng);
@@ -154,13 +156,13 @@ void Game::generateStars()
 
 		if (std::any_of(_stars.begin(), _stars.end(), [&](const Star& star)
 			{
-				return (star.getPos() - pos).getLenght() < outerRad + star.getRadius();
+				return (star.getPos() - pos).getLenght() < outerRad + outerRad * maxRadiusChange + star.getMaxRadius();
 			}))
 		{
 			continue;
 		}
 			const Color c = colors[colorSampler(_rng)];
-			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), c,colorFreqDist(_rng), phaseDist(_rng)));
+			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), c,colorFreqDist(_rng), phaseDist(_rng), scaleOffsetDist(_rng), maxRadiusChange));
 	}
 
 }

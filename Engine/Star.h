@@ -8,9 +8,10 @@
 class Star : public Entity
 {
 public:
-	Star(Vec2<float> pos, float radius, float innerRatio, int nFlares, Color c, float colorFreq, float colorPhase)
+	Star(Vec2<float> pos, float radius, float innerRatio, int nFlares, Color c, float colorFreq, float colorPhase, float scaleOffset, float maxChange)
 		: Entity(ShapeMaker::makeStar(radius, radius* innerRatio, nFlares), pos, c), _radius(radius),
-		_colorFreqFactor(colorFreq * 2.0f * 3.14159f), _colorPhase(colorPhase), _baseCol(c)
+		_colorFreqFactor(colorFreq * 2.0f * 3.14159f), _colorPhase(colorPhase), _baseCol(c),
+		_scaleOffset(scaleOffset), _maxChange(maxChange)
 	{
 
 	}
@@ -18,6 +19,7 @@ public:
 	{
 		_time += deltaTime;
 		UpdateColor();
+		UpdateScale();
 	}
 
 	//getters
@@ -25,10 +27,19 @@ public:
 	{
 		return _radius;
 	}
+	float getMaxRadius() const
+	{
+		return _radius + _radius * _maxChange;
+	}
 
 	RectF getBoundingRect() const
 	{
 		return RectF::fromCenter(getPos(), getRadius(), getRadius());
+	}
+
+	RectF getMaxBoundingRect() const
+	{
+		return RectF::fromCenter(getPos(), getMaxRadius(), getMaxRadius());
 	}
 
 private:
@@ -45,10 +56,17 @@ private:
 		setColor(c);
 	}
 
+	void UpdateScale()
+	{
+		float offset = (sin(_time + _scaleOffset)) * _maxChange;
+		setScale(1.0f + offset);
+	}
 private:
 	float _radius;
+	float _maxChange;
 	Color _baseCol;
 	float _colorFreqFactor;
 	float _colorPhase;
+	float _scaleOffset;
 	float _time = 0.0f;
 };
