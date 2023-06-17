@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Colors.h"
 #include "Shapes.h"
+#include "RectF.h"
 
 class Star : public Entity
 {
@@ -17,6 +18,11 @@ public:
 	float getRadius() const
 	{
 		return _radius;
+	}
+
+	RectF getBoundingRect() const
+	{
+		return RectF::fromCenter(getPos(), getRadius(), getRadius());
 	}
 
 private:

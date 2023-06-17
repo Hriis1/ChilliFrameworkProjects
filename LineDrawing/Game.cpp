@@ -106,7 +106,10 @@ void Game::ComposeFrame()
 	for (const auto& e : _stars)
 	{
 		Drawable dr = e.getDrawable();
-		_camera.draw(dr);
+
+		//Draw only the objects that are visible by the camera
+		if(_camera.getViewportRect().isOverlappingWith(e.getBoundingRect()))
+			_camera.draw(dr);
 	}
 }
 

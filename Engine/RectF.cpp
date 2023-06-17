@@ -25,12 +25,6 @@ bool RectF::isContainedBy(const RectF& other) const
 	return left >= other.left && right <= other.right && top >= other.top && bot <= other.bot;
 }
 
-RectF RectF::fromCenter(const Vec2<float>& center, float halfWidth, float halfHeight)
-{
-	const Vec2<float> half(halfWidth, halfHeight);
-	return RectF(center - half, center + half);
-}
-
 RectF RectF::getExpanded(float offset) const
 {
 	return RectF(left - offset, right + offset, top - offset, bot + offset);

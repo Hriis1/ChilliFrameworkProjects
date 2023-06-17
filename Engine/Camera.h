@@ -1,5 +1,6 @@
 #pragma once
 #include "CoordinateTransformer.h"
+#include "RectF.h"
 class Camera
 {
 public:
@@ -20,13 +21,12 @@ public:
 	{
 		return _scale;
 	}
-	Vec2<float> getXViewPort() const
+
+	RectF getViewportRect() const
 	{
-		return _currXViewPort;
-	}
-	Vec2<float> getYViewPort() const
-	{
-		return _currYViewPort;
+		const float zoom = 1.0f / _scale;
+
+		return RectF::fromCenter(_pos, float(Graphics::ScreenWidth / 2.0f) * zoom, float(Graphics::ScreenHeight / 2.0f) * zoom);
 	}
 
 	//setters
@@ -38,8 +38,6 @@ private:
 	Vec2<float> _pos = {0.0f, 0.0f};
 	float _scale = 1.0f;
 	CoordinateTransformer& _ct;
-	Vec2<float> _currXViewPort = {-Graphics::ScreenWidth/2, Graphics::ScreenWidth / 2 };
-	Vec2<float> _currYViewPort = { -Graphics::ScreenHeight / 2, Graphics::ScreenHeight / 2 };
 
 };
 

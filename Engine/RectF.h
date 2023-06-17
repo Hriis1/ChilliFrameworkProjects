@@ -11,8 +11,14 @@ public:
 	bool isOverlappingWith(const RectF& other) const;
 	bool isContainedBy(const RectF& other) const;
 
-	static RectF fromCenter(const Vec2<float>& center, float halfWidth, float halfHeight);
 	RectF getExpanded(float offset) const;
+
+	//static
+	static RectF fromCenter(const Vec2<float>& center, float halfWidth, float halfHeight)
+	{
+		const Vec2<float> half(halfWidth, halfHeight);
+		return RectF(center - half, center + half);
+	}
 
 	//getters
 	Vec2<float> getCenter() const { return Vec2<float>((left + right)/2.0f, (top + bot)/2.0f); }
