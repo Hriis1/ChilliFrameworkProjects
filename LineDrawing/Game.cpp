@@ -67,6 +67,8 @@ void Game::UpdateModel()
 		_e1.translateBy({speed, 0 });
 	}
 	*/
+
+	const float deltaTime = _ft.Mark();
 	while (!wnd.mouse.IsEmpty())
 	{
 		const auto e = wnd.mouse.Read();
@@ -95,6 +97,11 @@ void Game::UpdateModel()
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
 		_camera.moveBy(Vec2<float>(cameraSpeed, 0.0f));
+	}
+
+	for (auto& star : _stars)
+	{
+		star.Update(deltaTime);
 	}
 }
 
@@ -133,6 +140,11 @@ void Game::generateStars()
 	std::uniform_real_distribution<float> outerRDist(100.0f, maxStarRad);
 	std::uniform_real_distribution<float> innerRatioDist(0.2f, 0.8f);
 	std::uniform_int_distribution<int> pointsDist(3, 8);
+	std::uniform_real_distribution<float> colorFreqDist(0.6f, 4.0f);
+	std::uniform_real_distribution<float> phaseDist(0.0f, 2.0f * 3.14f);
+
+	const Color colors[] = { Colors::Red,Colors::White,Colors::Blue,Colors::Cyan,Colors::Yellow,Colors::Magenta,Colors::Green };
+	std::uniform_int_distribution<size_t> colorSampler(0, std::end(colors) - std::begin(colors));
 
 	while(_stars.size() < 200)
 	{
@@ -147,7 +159,8 @@ void Game::generateStars()
 		{
 			continue;
 		}
-			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), Colors::White));
+			const Color c = colors[colorSampler(_rng)];
+			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), c,colorFreqDist(_rng), phaseDist(_rng)));
 	}
 
 }

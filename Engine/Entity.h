@@ -51,6 +51,11 @@ public:
 	{
 		_scale = scale;
 	}
+
+	void setColor(Color c)
+	{
+		_color = c;
+	}
 private:
 	std::vector<Vec2<float>> _model;
 	Vec2<float> _pos = { 0.0f, 0.0f };

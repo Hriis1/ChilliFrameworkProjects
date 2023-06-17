@@ -29,6 +29,7 @@
 #include "Entity.h"
 #include "Star.h"
 #include "Camera.h"
+#include "FrameTimer.h"
 
 class Game
 {
@@ -51,10 +52,12 @@ private:
 	/*  User Variables              */
 	/********************************/
 
+	FrameTimer _ft;
 	CoordinateTransformer _coordTrans;
 	Camera _camera;
 	std::vector<Star> _stars;
 	std::mt19937 _rng;
+
 
 	Vec2<float> lastMousePos = { 0.0f, 0.0f };
 };
