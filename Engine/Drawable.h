@@ -7,7 +7,7 @@
 class Drawable
 {
 public:
-	Drawable(std::vector<Vec2<float>> model, Color c);
+	Drawable(const std::vector<Vec2<float>>& model, Color c);
 
 	void translate(const Vec2<float>& translation_in);
 	void scale(float scale_in);
@@ -17,7 +17,7 @@ public:
 
 	void Render(Graphics& gfx);
 private:
-	std::vector<Vec2<float>> _model;
+	const std::vector<Vec2<float>>* _model;
 	Vec2<float> _translation = {0.0f, 0.0f};
 	float _scaleX = 1.0f;
 	float _scaleY = 1.0f;

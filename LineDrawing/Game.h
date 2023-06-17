@@ -55,4 +55,6 @@ private:
 	Camera _camera;
 	std::vector<Star> _stars;
 	std::mt19937 _rng;
+
+	Vec2<float> lastMousePos = { 0.0f, 0.0f };
 };

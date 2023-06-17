@@ -366,6 +366,29 @@ void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, Color c)
 	drawLine(verts.back(), verts.front(), c);
 }
 
+void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, const Vec2<float>& translation, float scaleX, float scaleY, Color c)
+{
+	const auto xform = [&](Vec2<float> v)
+	{
+		v._x *= scaleX;
+		v._y *= scaleY;
+		v += translation;
+		return v;
+	};
+
+	const Vec2<float> front = xform(verts.front());
+	Vec2<float> cur = front;
+
+	for (size_t i = 0; i < verts.size() - 1; i++)
+	{
+		const Vec2<float> next = xform(verts[i+1]);
+		drawLine(cur, next, c);
+		cur = next;
+	}
+	drawLine(cur, front, c);
+
+}
+
 
 //////////////////////////////////////////////////
 //           Graphics Exception

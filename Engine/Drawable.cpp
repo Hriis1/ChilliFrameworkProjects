@@ -1,7 +1,7 @@
 #include "Drawable.h"
 
-Drawable::Drawable(std::vector<Vec2<float>> model, Color c)
-	: _model(std::move(model)), _color(c)
+Drawable::Drawable(const std::vector<Vec2<float>>& model, Color c)
+	: _model(&model), _color(c)
 {
 }
 
@@ -39,12 +39,6 @@ void Drawable::scaleY(float scaleY_in)
 
 void Drawable::Render(Graphics& gfx)
 {
-	for (auto& vert : _model)
-	{
-		vert._x *= _scaleX;
-		vert._y *= _scaleY;
-		vert += _translation;
-	}
 
-	gfx.drawPolyLine(_model, _color);
+	gfx.drawPolyLine(*_model,_translation,_scaleX, _scaleY, _color);
 }

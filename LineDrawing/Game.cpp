@@ -76,6 +76,8 @@ void Game::UpdateModel()
 		else if(e.GetType() == Mouse::Event::Type::WheelDown)
 			_camera.setScale(_camera.getScale() * 0.9f);
 	}
+	
+	
 
 	const float cameraSpeed = 3.0f;
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
@@ -98,11 +100,9 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	if(wnd.mouse.LeftIsPressed())
-		gfx.drawLine(Vec2<float>(100, 100), Vec2<float>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);
+	/*if(wnd.mouse.LeftIsPressed())
+		gfx.drawLine(Vec2<float>(100, 100), Vec2<float>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);*/
 
-
-	
 	for (const auto& e : _stars)
 	{
 		Drawable dr = e.getDrawable();
