@@ -26,15 +26,17 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	_coordTrans(gfx), _camera(_coordTrans)
+	_rng(std::random_device()()),_coordTrans(gfx), _camera(_coordTrans)
 {
-	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(460.0f, 0.0f));
+	/*_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(460.0f, 0.0f));
 	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(150.0f, 300.0f));
 	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(250.0f, -200.0f));
 	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(-250.0f, 200.0f));
 	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(0.0f, 0.0f));
 	_entities.emplace_back(ShapeMaker::makeStar(200.0f, 50.0f), Vec2<float>(-150.0f, -300.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(400.0f, 300.0f));
+	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(400.0f, 300.0f));*/
+
+	generateStars();
 }
 
 void Game::Go()
@@ -105,5 +107,23 @@ void Game::ComposeFrame()
 	{
 		Drawable dr = e.getDrawable();
 		_camera.draw(dr);
+	}
+}
+
+
+
+
+
+void Game::generateStars()
+{
+	std::uniform_int_distribution<int> xDist(-5000, 5000);
+	std::uniform_int_distribution<int> yDist(-3000, 3000);
+	std::uniform_real_distribution<float> outerRDist(100.0f, 250.0f);
+	std::uniform_real_distribution<float> innerRDist(30.0f, 100.0f);
+	std::uniform_int_distribution<int> pointsDist(3, 8);
+
+	for (size_t i = 0; i < 200; i++)
+	{
+		_entities.emplace_back(ShapeMaker::makeStar(outerRDist(_rng), innerRDist(_rng), pointsDist(_rng)), Vec2<float>(xDist(_rng), yDist(_rng)));
 	}
 }

@@ -20,6 +20,8 @@
  ******************************************************************************************/
 #pragma once
 
+#include <random>
+
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
@@ -40,13 +42,16 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
+	void generateStars();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+
 	CoordinateTransformer _coordTrans;
 	Camera _camera;
 	std::vector<Entity> _entities;
+	std::mt19937 _rng;
 };
