@@ -116,7 +116,7 @@ void Game::ComposeFrame()
 		Drawable dr = e.getDrawable();
 
 		//Draw only the objects that are visible by the camera
-		if(viewPort.isOverlappingWith(e.getMaxBoundingRect()))
+		if(viewPort.isOverlappingWith(e.getBoundingRect()))
 			_camera.draw(dr);
 	}
 }

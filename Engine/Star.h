@@ -25,7 +25,7 @@ public:
 	//getters
 	float getRadius() const
 	{
-		return _radius;
+		return _radius * getScale();
 	}
 	float getMaxRadius() const
 	{
@@ -35,11 +35,6 @@ public:
 	RectF getBoundingRect() const
 	{
 		return RectF::fromCenter(getPos(), getRadius(), getRadius());
-	}
-
-	RectF getMaxBoundingRect() const
-	{
-		return RectF::fromCenter(getPos(), getMaxRadius(), getMaxRadius());
 	}
 
 private:
