@@ -103,7 +103,7 @@ void Game::ComposeFrame()
 
 
 	
-	for (const auto& e : _entities)
+	for (const auto& e : _stars)
 	{
 		Drawable dr = e.getDrawable();
 		_camera.draw(dr);
@@ -116,14 +116,34 @@ void Game::ComposeFrame()
 
 void Game::generateStars()
 {
-	std::uniform_int_distribution<int> xDist(-5000, 5000);
-	std::uniform_int_distribution<int> yDist(-3000, 3000);
-	std::uniform_real_distribution<float> outerRDist(100.0f, 250.0f);
-	std::uniform_real_distribution<float> innerRDist(30.0f, 100.0f);
+	int xMin = -5000;
+	int xMax = 5000;
+
+	int yMin = -3000;
+	int yMax = 3000;
+
+	float maxStarRad = 300.0f;
+
+	std::uniform_int_distribution<int> xDist(xMin, xMax);
+	std::uniform_int_distribution<int> yDist(yMin, yMax);
+	std::uniform_real_distribution<float> outerRDist(100.0f, maxStarRad);
+	std::uniform_real_distribution<float> innerRatioDist(0.2f, 0.8f);
 	std::uniform_int_distribution<int> pointsDist(3, 8);
 
-	for (size_t i = 0; i < 200; i++)
+	while(_stars.size() < 200)
 	{
-		_entities.emplace_back(ShapeMaker::makeStar(outerRDist(_rng), innerRDist(_rng), pointsDist(_rng)), Vec2<float>(xDist(_rng), yDist(_rng)));
+		Vec2<float> pos = Vec2<float>(xDist(_rng), yDist(_rng));
+		float outerRad = outerRDist(_rng);
+		float innerRatio = innerRatioDist(_rng);
+
+		if (std::any_of(_stars.begin(), _stars.end(), [&](const Star& star)
+			{
+				return (star.getPos() - pos).getLenght() < outerRad + star.getRadius();
+			}))
+		{
+			continue;
+		}
+			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), Colors::White));
 	}
+
 }

@@ -27,6 +27,7 @@
 #include "Graphics.h"
 #include "CoordinateTransformer.h"
 #include "Entity.h"
+#include "Star.h"
 #include "Camera.h"
 
 class Game
@@ -52,6 +53,6 @@ private:
 
 	CoordinateTransformer _coordTrans;
 	Camera _camera;
-	std::vector<Entity> _entities;
+	std::vector<Star> _stars;
 	std::mt19937 _rng;
 };
