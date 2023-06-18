@@ -56,6 +56,17 @@ public:
 	{
 		_color = c;
 	}
+
+protected:
+	void setModel(std::vector<Vec2<float>> model_in)
+	{
+		_model = std::move(model_in);
+	}
+
+	const std::vector<Vec2<float>>& getModel()
+	{
+		return _model;
+	}
 private:
 	std::vector<Vec2<float>> _model;
 	Vec2<float> _pos = { 0.0f, 0.0f };

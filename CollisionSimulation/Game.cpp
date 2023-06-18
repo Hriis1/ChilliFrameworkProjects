@@ -26,7 +26,8 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	_coordTrans(gfx), _camera(_coordTrans)
+	_coordTrans(gfx), _camera(_coordTrans),
+	_plank({ 100.0f,200.0f }, -380.0f, -100.0f, 290.0f)
 {
 
 }
@@ -43,12 +44,22 @@ void Game::UpdateModel()
 {
 	const float deltaTime = _ft.Mark();
 	//updateCamera();
+
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		_plank.MoveFreeY(-2.0f);
+	}
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		_plank.MoveFreeY(2.0f);
+	}
 	
 }
 
 void Game::ComposeFrame()
 {
-	
+	Drawable dr = _plank.getDrawable();
+	_camera.draw(dr);
 }
 
 void Game::updateCamera()

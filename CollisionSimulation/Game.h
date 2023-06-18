@@ -26,10 +26,12 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "CoordinateTransformer.h"
-#include "Entity.h"
-#include "Star.h"
 #include "Camera.h"
 #include "FrameTimer.h"
+
+#include "Entity.h"
+#include "Plank.h"
+
 
 class Game
 {
@@ -52,9 +54,11 @@ private:
 	/*  User Variables              */
 	/********************************/
 
-	//Gamr objs
+	//Game objs
 	FrameTimer _ft;
 	CoordinateTransformer _coordTrans;
 	Camera _camera;
+
+	Plank _plank;
 
 };
