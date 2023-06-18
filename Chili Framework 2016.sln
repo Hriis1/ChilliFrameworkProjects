@@ -11,6 +11,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LineDrawing", "LineDrawing\
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CollisionSimulation", "CollisionSimulation\CollisionSimulation.vcxproj", "{3F34FE67-6E74-4175-A3A7-232EA5370F80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FFCA512B-49FC-4FC8-8A73-C4F87D322FF2} = {FFCA512B-49FC-4FC8-8A73-C4F87D322FF2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
