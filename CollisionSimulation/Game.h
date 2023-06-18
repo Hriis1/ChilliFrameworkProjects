@@ -44,7 +44,7 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-	void generateStars();
+	void updateCamera();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
@@ -52,12 +52,9 @@ private:
 	/*  User Variables              */
 	/********************************/
 
+	//Gamr objs
 	FrameTimer _ft;
 	CoordinateTransformer _coordTrans;
 	Camera _camera;
-	std::vector<Star> _stars;
-	std::mt19937 _rng;
 
-
-	Vec2<float> lastMousePos = { 0.0f, 0.0f };
 };

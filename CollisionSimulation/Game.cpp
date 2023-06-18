@@ -26,17 +26,9 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	_rng(std::random_device()()),_coordTrans(gfx), _camera(_coordTrans)
+	_coordTrans(gfx), _camera(_coordTrans)
 {
-	/*_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(460.0f, 0.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(150.0f, 300.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(250.0f, -200.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(-250.0f, 200.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(0.0f, 0.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(200.0f, 50.0f), Vec2<float>(-150.0f, -300.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(400.0f, 300.0f));*/
 
-	generateStars();
 }
 
 void Game::Go()
@@ -49,37 +41,29 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	/*const int speed = 3;
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		_e1.translateBy({0, -speed});
-	}
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		_e1.translateBy({0, speed});
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		_e1.translateBy({-speed, 0});
-	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		_e1.translateBy({speed, 0 });
-	}
-	*/
-
 	const float deltaTime = _ft.Mark();
+	//updateCamera();
+	
+}
+
+void Game::ComposeFrame()
+{
+	
+}
+
+void Game::updateCamera()
+{
 	while (!wnd.mouse.IsEmpty())
 	{
 		const auto e = wnd.mouse.Read();
 
 		if (e.GetType() == Mouse::Event::Type::WheelUp)
 			_camera.setScale(_camera.getScale() * 1.1f);
-		else if(e.GetType() == Mouse::Event::Type::WheelDown)
+		else if (e.GetType() == Mouse::Event::Type::WheelDown)
 			_camera.setScale(_camera.getScale() * 0.9f);
 	}
-	
-	
+
+
 
 	const float cameraSpeed = 3.0f;
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
@@ -98,71 +82,4 @@ void Game::UpdateModel()
 	{
 		_camera.moveBy(Vec2<float>(cameraSpeed, 0.0f));
 	}
-
-	for (auto& star : _stars)
-	{
-		star.Update(deltaTime);
-	}
-}
-
-void Game::ComposeFrame()
-{
-	/*if(wnd.mouse.LeftIsPressed())
-		gfx.drawLine(Vec2<float>(100, 100), Vec2<float>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);*/
-
-	const auto viewPort = _camera.getViewportRect();
-	for (const auto& e : _stars)
-	{
-		Drawable dr = e.getDrawable();
-
-		//Draw only the objects that are visible by the camera
-		if(viewPort.isOverlappingWith(e.getBoundingRect()))
-			_camera.draw(dr);
-	}
-}
-
-
-
-
-
-void Game::generateStars()
-{
-	int xMin = -5000;
-	int xMax = 5000;
-
-	int yMin = -3000;
-	int yMax = 3000;
-
-	float maxStarRad = 300.0f;
-
-	std::uniform_int_distribution<int> xDist(xMin, xMax);
-	std::uniform_int_distribution<int> yDist(yMin, yMax);
-	std::uniform_real_distribution<float> outerRDist(100.0f, maxStarRad);
-	std::uniform_real_distribution<float> innerRatioDist(0.2f, 0.8f);
-	std::uniform_int_distribution<int> pointsDist(3, 8);
-	std::uniform_real_distribution<float> colorFreqDist(0.6f, 4.0f);
-	std::uniform_real_distribution<float> phaseDist(0.0f, 2.0f * 3.14f);
-	std::uniform_real_distribution<float> scaleOffsetDist(0.0f, 30.0f);
-	float maxRadiusChange = 0.6f;
-
-	const Color colors[] = { Colors::Red,Colors::Blue,Colors::Cyan,Colors::Yellow,Colors::Magenta,Colors::Green };
-	std::uniform_int_distribution<size_t> colorSampler(0, std::end(colors) - std::begin(colors));
-
-	while(_stars.size() < 100)
-	{
-		Vec2<float> pos = Vec2<float>(xDist(_rng), yDist(_rng));
-		float outerRad = outerRDist(_rng);
-		float innerRatio = innerRatioDist(_rng);
-
-		if (std::any_of(_stars.begin(), _stars.end(), [&](const Star& star)
-			{
-				return (star.getPos() - pos).getLenght() < outerRad + outerRad * maxRadiusChange + star.getMaxRadius();
-			}))
-		{
-			continue;
-		}
-			const Color c = colors[colorSampler(_rng)];
-			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), c,colorFreqDist(_rng), phaseDist(_rng), scaleOffsetDist(_rng), maxRadiusChange));
-	}
-
 }
