@@ -36,7 +36,7 @@ public:
 		return *this;
 	}
 
-	T dot(Vec2<T>& other) const
+	T dot(const Vec2<T>& other) const
 	{
 		return _x * other._x + _y * other._y;
 	}
