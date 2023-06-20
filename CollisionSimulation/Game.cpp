@@ -21,12 +21,13 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include "Shapes.h"
+#include "MathKEK.H"
 
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	_sPoint(_balls, 20.0f, {-100.0f, -200.0f}, -2.0f, 2.0f, 2.0f, 0.5f),
+	_sPoint(_balls, 20.0f, {-100.0f, -200.0f}, -2.0f, 0.5f, 2.0f, 0.5f),
 	_coordTrans(gfx), _camera(_coordTrans),
 	_plank({ 0.0f,200.0f }, -380.0f, -100.0f, 290.0f)
 {
