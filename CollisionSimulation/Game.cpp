@@ -68,7 +68,7 @@ void Game::UpdateModel()
 			if (pointLineDistance(plankPts.first, plankPts.second, ballIter->getPos()) < ballIter->getRadius())
 			{
 				ballIter->setColor(Colors::Green);
-				const Vec2<float> w = _plank.getPlankSurfaceVector();
+				const Vec2<float> w = _plank.getPlankSurfaceVector().getNormalized();
 				const Vec2<float> v = ballIter->getVel();
 				ballIter->setVel(w * 2 * (v.dot(w)) - v);
 
