@@ -32,6 +32,7 @@
 #include "Entity.h"
 #include "Plank.h"
 #include "PlankVer2.h";
+#include "Ball.h"
 
 
 class Game
@@ -61,5 +62,6 @@ private:
 	Camera _camera;
 
 	Plank _plank;
+	Ball _ball;
 
 };

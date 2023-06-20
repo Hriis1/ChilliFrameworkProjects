@@ -27,7 +27,8 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	_coordTrans(gfx), _camera(_coordTrans),
-	_plank({ 100.0f,200.0f }, -380.0f, -100.0f, 290.0f)
+	_plank({ 100.0f,200.0f }, -380.0f, -100.0f, 290.0f),
+	_ball({300.0f, -200.0f}, 30.0f, {-1.0f, 1.0f})
 {
 
 }
@@ -53,13 +54,18 @@ void Game::UpdateModel()
 	{
 		_plank.moveFreeY(2.0f);
 	}
+
+	_ball.update();
 	
 }
 
 void Game::ComposeFrame()
 {
-	Drawable dr = _plank.getDrawable();
-	_camera.draw(dr);
+	Drawable plankDrawable = _plank.getDrawable();
+	Drawable ballDrawable = _ball.getDrawable();
+
+	_camera.draw(plankDrawable);
+	_camera.draw(ballDrawable);
 }
 
 void Game::updateCamera()

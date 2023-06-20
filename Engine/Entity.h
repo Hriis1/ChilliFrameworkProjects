@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Vec2.h"
+#include "Drawable.h"
 
 class Entity
 {
