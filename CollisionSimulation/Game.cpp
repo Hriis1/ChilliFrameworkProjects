@@ -57,9 +57,20 @@ void Game::UpdateModel()
 
 	_sPoint.update(deltaTime);
 
+	const auto plankPts = _plank.getPoints();
 	for (auto ballIter = _balls.begin(); ballIter != _balls.end();)
 	{
 		ballIter->update();
+
+		if (ballIter != _balls.end())
+		{
+			//if this is true we have a collision between the ball and the plank
+			if (pointLineDistance(plankPts.first, plankPts.second, ballIter->getPos()) < ballIter->getRadius())
+			{
+				ballIter->setColor(Colors::Green);
+			}
+		}
+
 		if (std::abs(ballIter->getPos()._y) >= 1500.0f)
 		{
 			ballIter = _balls.erase(ballIter);
@@ -68,6 +79,9 @@ void Game::UpdateModel()
 		{
 			ballIter++;
 		}
+
+		
+		
 	}
 	
 }

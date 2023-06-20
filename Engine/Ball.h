@@ -7,7 +7,7 @@ class Ball : public Entity
 {
 public:
 	Ball(Vec2<float> pos, float radius, Vec2<float> vel, Color c = Colors::Red)
-		: Entity(ShapeMaker::makeStar(radius, radius, 8), pos), _vel(vel), _radius(radius)
+		: Entity(ShapeMaker::makeStar(radius, radius, 8), pos, c), _vel(vel), _radius(radius)
 	{
 
 	}
