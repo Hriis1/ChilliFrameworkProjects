@@ -27,10 +27,9 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	_coordTrans(gfx), _camera(_coordTrans),
-	_plank({ 100.0f,200.0f }, -380.0f, -100.0f, 290.0f),
-	_ball({300.0f, -200.0f}, 30.0f, {-1.0f, 1.0f})
+	_plank({ 100.0f,200.0f }, -380.0f, -100.0f, 290.0f)
 {
-
+	_balls.emplace_back(Vec2<float>(300.0f, -200.0f), 30.0f, Vec2<float>(-1.0f, 1.0f));
 }
 
 void Game::Go()
@@ -44,7 +43,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	const float deltaTime = _ft.Mark();
-	//updateCamera();
+	updateCamera();
 
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
@@ -55,17 +54,32 @@ void Game::UpdateModel()
 		_plank.moveFreeY(2.0f);
 	}
 
-	_ball.update();
+	for (auto ballIter = _balls.begin(); ballIter != _balls.end();)
+	{
+		ballIter->update();
+		if (std::abs(ballIter->getPos()._y) >= 2000.0f)
+		{
+			ballIter = _balls.erase(ballIter);
+		}
+		else
+		{
+			ballIter++;
+		}
+	}
 	
 }
 
 void Game::ComposeFrame()
 {
 	Drawable plankDrawable = _plank.getDrawable();
-	Drawable ballDrawable = _ball.getDrawable();
-
 	_camera.draw(plankDrawable);
-	_camera.draw(ballDrawable);
+
+
+	for (auto ballIter = _balls.begin(); ballIter != _balls.end(); ballIter++)
+	{
+		Drawable ballDrawable = ballIter->getDrawable();
+		_camera.draw(ballDrawable);
+	}
 }
 
 void Game::updateCamera()
@@ -82,7 +96,7 @@ void Game::updateCamera()
 
 
 
-	const float cameraSpeed = 3.0f;
+	/*const float cameraSpeed = 3.0f;
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
 		_camera.moveBy(Vec2<float>(0.0f, -cameraSpeed));
@@ -98,5 +112,5 @@ void Game::updateCamera()
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
 		_camera.moveBy(Vec2<float>(cameraSpeed, 0.0f));
-	}
+	}*/
 }

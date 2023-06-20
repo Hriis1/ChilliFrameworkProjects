@@ -62,6 +62,6 @@ private:
 	Camera _camera;
 
 	Plank _plank;
-	Ball _ball;
+	std::vector<Ball> _balls;
 
 };
