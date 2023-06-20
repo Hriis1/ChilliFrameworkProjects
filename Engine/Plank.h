@@ -30,7 +30,7 @@ public:
 		setModel(std::move(model));
 		return Entity::getDrawable();
 	}
-	void MoveFreeY(float deltaY)
+	void moveFreeY(float deltaY)
 	{
 		setFreeY(getFreePt()._y + deltaY);
 	}

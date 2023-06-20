@@ -61,6 +61,5 @@ private:
 	Camera _camera;
 
 	Plank _plank;
-	PlankVer2 _plankVer2;
 
 };

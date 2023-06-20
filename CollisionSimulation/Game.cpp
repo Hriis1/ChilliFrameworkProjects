@@ -27,8 +27,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	_coordTrans(gfx), _camera(_coordTrans),
-	_plank({ 100.0f,200.0f }, -380.0f, -100.0f, 290.0f),
-	_plankVer2({ -300.0f, 200.0f }, 400.0f, 100.0f, -300.0f)
+	_plank({ 100.0f,200.0f }, -380.0f, -100.0f, 290.0f)
 {
 
 }
@@ -48,18 +47,18 @@ void Game::UpdateModel()
 
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
-		_plankVer2.moveFreePoint(-2.0f);
+		_plank.moveFreeY(-2.0f);
 	}
 	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
-		_plankVer2.moveFreePoint(2.0f);
+		_plank.moveFreeY(2.0f);
 	}
 	
 }
 
 void Game::ComposeFrame()
 {
-	Drawable dr = _plankVer2.getDrawable();
+	Drawable dr = _plank.getDrawable();
 	_camera.draw(dr);
 }
 
