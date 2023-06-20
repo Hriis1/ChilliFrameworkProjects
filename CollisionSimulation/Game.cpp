@@ -60,16 +60,17 @@ void Game::UpdateModel()
 	const auto plankPts = _plank.getPoints();
 	for (auto ballIter = _balls.begin(); ballIter != _balls.end();)
 	{
-		ballIter->update();
+		ballIter->update(deltaTime);
 
 		if (ballIter != _balls.end())
 		{
 			//if this is true we have a collision between the ball and the plank
-			if (pointLineDistance(plankPts.first, plankPts.second, ballIter->getPos()) < ballIter->getRadius())
+			if (pointLineDistance(plankPts.first, plankPts.second, ballIter->getPos()) < ballIter->getRadius() && ballIter->canCollide())
 			{
 				ballIter->setColor(Colors::Green);
 				const Vec2<float> w = _plank.getPlankSurfaceVector().getNormalized();
 				const Vec2<float> v = ballIter->getVel();
+				ballIter->onCollision();
 				ballIter->setVel(w * 2 * (v.dot(w)) - v);
 
 			}
