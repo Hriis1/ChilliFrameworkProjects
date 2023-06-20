@@ -33,6 +33,7 @@
 #include "Plank.h"
 #include "PlankVer2.h";
 #include "Ball.h"
+#include "SpawnPoint.h"
 
 
 class Game
@@ -61,6 +62,7 @@ private:
 	CoordinateTransformer _coordTrans;
 	Camera _camera;
 
+	SpawnPoint _sPoint;
 	Plank _plank;
 	std::vector<Ball> _balls;
 

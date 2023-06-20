@@ -26,10 +26,10 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
+	_sPoint(_balls, 20.0f, {-100.0f, -200.0f}, -2.0f, 2.0f, 2.0f, 0.5f),
 	_coordTrans(gfx), _camera(_coordTrans),
-	_plank({ 100.0f,200.0f }, -380.0f, -100.0f, 290.0f)
+	_plank({ 0.0f,200.0f }, -380.0f, -100.0f, 290.0f)
 {
-	_balls.emplace_back(Vec2<float>(300.0f, -200.0f), 30.0f, Vec2<float>(-1.0f, 1.0f));
 }
 
 void Game::Go()
@@ -54,10 +54,12 @@ void Game::UpdateModel()
 		_plank.moveFreeY(2.0f);
 	}
 
+	_sPoint.update(deltaTime);
+
 	for (auto ballIter = _balls.begin(); ballIter != _balls.end();)
 	{
 		ballIter->update();
-		if (std::abs(ballIter->getPos()._y) >= 2000.0f)
+		if (std::abs(ballIter->getPos()._y) >= 1500.0f)
 		{
 			ballIter = _balls.erase(ballIter);
 		}
