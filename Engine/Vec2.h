@@ -36,6 +36,11 @@ public:
 		return *this;
 	}
 
+	T dot(Vec2<T>& other) const
+	{
+		return _x * other._x + _y * other._y;
+	}
+
 	//getters
 	T getLenghtSqrt() const { return _x * _x + _y * _y; }
 	T getLenght() const { return  (T)std::sqrt(getLenghtSqrt()); }
