@@ -3,7 +3,6 @@
 #include "Shapes.h"
 #include "Entity.h"
 
-constexpr float INIT_COLLISION_CD = 0.1f;
 
 class Ball : public Entity
 {
@@ -16,23 +15,8 @@ public:
 	void update(float deltaTime)
 	{
 		translateBy(_vel);
-
-		if (!_canCollide)
-		{
-			_collisionCD -= deltaTime;
-			if (_collisionCD <= 0)
-			{
-				_canCollide == true;
-				_collisionCD = INIT_COLLISION_CD;
-			}
-		}
 	}
 
-
-	void onCollision()
-	{
-		_canCollide = false;
-	}
 
 	//getters
 	float getRadius() const
@@ -43,11 +27,6 @@ public:
 	Vec2<float> getVel() const
 	{
 		return _vel;	
-	}
-
-	bool canCollide() const
-	{
-		return _canCollide;
 	}
 
 	//setters
