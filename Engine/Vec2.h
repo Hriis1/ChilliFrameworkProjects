@@ -53,6 +53,15 @@ public:
 		return *this * ((T)1/ len);
 	}
 
+	Vec2 getRotatedPositive90Degrees() const
+	{
+		return Vec2<T> {-_y, _x};
+	}
+	Vec2 getRotatedNegative90Degrees() const
+	{
+		return Vec2<T> {_y, -_x};
+	}
+
 	//operators
 	bool operator==(const Vec2& other) const
 	{

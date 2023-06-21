@@ -57,45 +57,17 @@ void Game::UpdateModel()
 
 	_sPoint.update(deltaTime);
 
-	const auto plankPts = _plank.getPoints();
-	const float deltax = plankPts.second._x - plankPts.first._x;
-	const float deltay = plankPts.second._y - plankPts.first._y;
 	for (auto ballIter = _balls.begin(); ballIter != _balls.end();)
 	{
 		ballIter->update(deltaTime);
 
-		Vec2<float> plankNormal;
 		const Vec2<float> ballPos = ballIter->getPos();
 
 		if (ballIter != _balls.end())
 		{
-			// get the plank normal in the direction of the ball
-			//plank is a horizontal line
-			if (deltay == 0)
-			{
-				//set the normal to either 0 1 or 0 -1 depending on if the ball is above or below the plank (the normal must be in the direction of the ball)
-				plankNormal = { 0.0f, ballPos._y > plankPts.first._y ? 1.0f : -1.0f };
-			}
-			//plank is a vertical line
-			else if (deltax == 0)
-			{
-				//the normal must be in the direction of the ball
-				plankNormal = { ballPos._x > plankPts.first._x ? 1.0f : -1.0f, 0.0f  };
-			}
-			else
-			{
-				const float m = deltay / deltax;
-				const float w = -deltax / deltay;
-
-				const float b = plankPts.first._y - m * plankPts.first._x;
-				const float p = ballPos._y - w * ballPos._x;
-
-				const float x = (p - b) / (m - w);
-				const auto y = m * x + b;
-
-				plankNormal = (ballPos - Vec2<float>{x, y}).normalize();
-			}
-			
+			const auto plankVector = _plank.getPlankSurfaceVector();
+			const auto plankPts = _plank.getPoints();
+			const auto plankNormal = plankVector.getRotatedNegative90Degrees();
 			//Only check for collision if the ball is going towards the plank
 			if(plankNormal.dot(ballIter->getVel()) < 0.0f)
 			{ 
