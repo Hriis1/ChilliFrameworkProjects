@@ -39,6 +39,4 @@ private:
 
 	float _radius;
 	Vec2<float> _vel;
-	float _collisionCD = INIT_COLLISION_CD;
-	bool _canCollide = true;
 };
