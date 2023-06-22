@@ -33,6 +33,11 @@ public:
 	{
 		return _scale;
 	}
+	
+	float getAngle()
+	{
+		return _angle;
+	}
 
 	Drawable getDrawable() const
 	{
@@ -58,6 +63,12 @@ public:
 		_color = c;
 	}
 
+	void setAngle(float a)
+	{
+		_angle = a;
+	}
+
+
 protected:
 	void setModel(std::vector<Vec2<float>> model_in)
 	{
@@ -71,6 +82,7 @@ protected:
 private:
 	std::vector<Vec2<float>> _model;
 	Vec2<float> _pos = { 0.0f, 0.0f };
+	float _angle = 0.0f;
 	float _scale = 1.0f;
 	Color _color;
 };
