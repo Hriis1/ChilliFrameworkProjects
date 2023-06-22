@@ -368,7 +368,6 @@ void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, Color c)
 
 void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, const Vec2<float>& translation, float scaleX, float scaleY, float angle, Color c)
 {
-	float an = angle;
 	const auto xform = [&](Vec2<float> v)
 	{
 		v.Rotate(angle);
