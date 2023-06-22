@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include "Shapes.h"
+#include "MathKEK.H"
 
 Game::Game(MainWindow& wnd)
 	:
@@ -135,6 +136,9 @@ void Game::generateStars()
 
 	float maxStarRad = 300.0f;
 
+	float minRotSpeed = -2.0 * PI;
+	float maxRotSpeed = 2.0 * PI;
+
 	std::uniform_int_distribution<int> xDist(xMin, xMax);
 	std::uniform_int_distribution<int> yDist(yMin, yMax);
 	std::uniform_real_distribution<float> outerRDist(100.0f, maxStarRad);
@@ -143,7 +147,10 @@ void Game::generateStars()
 	std::uniform_real_distribution<float> colorFreqDist(0.6f, 4.0f);
 	std::uniform_real_distribution<float> phaseDist(0.0f, 2.0f * 3.14f);
 	std::uniform_real_distribution<float> scaleOffsetDist(0.0f, 30.0f);
+	std::uniform_real_distribution<float> rotationDist(minRotSpeed, maxRotSpeed);
 	float maxRadiusChange = 0.6f;
+
+	
 
 	const Color colors[] = { Colors::Red,Colors::Blue,Colors::Cyan,Colors::Yellow,Colors::Magenta,Colors::Green };
 	std::uniform_int_distribution<size_t> colorSampler(0, std::end(colors) - std::begin(colors));
@@ -162,7 +169,7 @@ void Game::generateStars()
 			continue;
 		}
 			const Color c = colors[colorSampler(_rng)];
-			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), c,colorFreqDist(_rng), phaseDist(_rng), scaleOffsetDist(_rng), maxRadiusChange));
+			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), c,colorFreqDist(_rng), phaseDist(_rng), scaleOffsetDist(_rng), maxRadiusChange, rotationDist(_rng)));
 	}
 
 }
