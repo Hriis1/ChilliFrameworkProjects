@@ -13,7 +13,7 @@ public:
 	{}
 	void draw(Drawable& drawable) const
 	{
-		const Vec2 offset = { float(Graphics::ScreenWidth / 2),float(Graphics::ScreenHeight / 2) };
+		const Vec2<float> offset = { float(Graphics::ScreenWidth / 2),float(Graphics::ScreenHeight / 2) };
 		drawable.scaleIndependent(1.0f, -1.0f);
 		drawable.translate(offset);
 		drawable.Render(_gfx);
