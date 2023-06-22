@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include "Shapes.h"
+#include "MathKEK.h"
 
 Game::Game(MainWindow& wnd)
 	:
@@ -135,8 +136,8 @@ void Game::generateStars()
 
 	float maxStarRad = 300.0f;
 
-	float minRotSpeed = -2.0f;
-	float maxRotSpeed = 2.0f;
+	float minRotSpeed = -2.0f * PI;
+	float maxRotSpeed = 2.0f * PI;
 
 	std::uniform_int_distribution<int> xDist(xMin, xMax);
 	std::uniform_int_distribution<int> yDist(yMin, yMax);
