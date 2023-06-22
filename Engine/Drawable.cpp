@@ -40,5 +40,5 @@ void Drawable::scaleY(float scaleY_in)
 void Drawable::Render(Graphics& gfx)
 {
 
-	gfx.drawPolyLine(*_model,_translation,_scaleX, _scaleY, _color);
+	gfx.drawPolyLine(*_model,_translation,_scaleX, _scaleY,_angle, _color);
 }
