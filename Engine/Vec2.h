@@ -42,6 +42,15 @@ public:
 		return *this;
 	}
 
+	Vec2& Rotate(T sinTheta, T cosTheta)
+	{
+		const T newX = _x * cosTheta - _y * sinTheta;
+		_y = _x * sinTheta + _y * cosTheta;
+		_x = newX;
+
+		return *this;
+	}
+
 	Vec2& normalize()
 	{
 		*this = getNormalized();
