@@ -8,10 +8,10 @@
 class Star : public Entity
 {
 public:
-	Star(Vec2<float> pos, float radius, float innerRatio, int nFlares, Color c, float colorFreq, float colorPhase, float scaleOffset, float maxChange)
+	Star(Vec2<float> pos, float radius, float innerRatio, int nFlares, Color c, float colorFreq, float colorPhase, float scaleOffset, float maxChange, float rotationSpeed)
 		: Entity(ShapeMaker::makeStar(radius, radius* innerRatio, nFlares), pos, c), _radius(radius),
 		_colorFreqFactor(colorFreq * 2.0f * 3.14159f), _colorPhase(colorPhase), _baseCol(c),
-		_scaleOffset(scaleOffset), _maxChange(maxChange)
+		_scaleOffset(scaleOffset), _maxChange(maxChange), _rotationSpeed(rotationSpeed)
 	{
 
 	}
@@ -63,5 +63,6 @@ private:
 	float _colorFreqFactor;
 	float _colorPhase;
 	float _scaleOffset;
+	float _rotationSpeed;
 	float _time = 0.0f;
 };

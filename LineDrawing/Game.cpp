@@ -135,6 +135,9 @@ void Game::generateStars()
 
 	float maxStarRad = 300.0f;
 
+	float minRotSpeed = -2.0f;
+	float maxRotSpeed = 2.0f;
+
 	std::uniform_int_distribution<int> xDist(xMin, xMax);
 	std::uniform_int_distribution<int> yDist(yMin, yMax);
 	std::uniform_real_distribution<float> outerRDist(100.0f, maxStarRad);
@@ -143,6 +146,7 @@ void Game::generateStars()
 	std::uniform_real_distribution<float> colorFreqDist(0.6f, 4.0f);
 	std::uniform_real_distribution<float> phaseDist(0.0f, 2.0f * 3.14f);
 	std::uniform_real_distribution<float> scaleOffsetDist(0.0f, 30.0f);
+	std::uniform_real_distribution<float> rotationSpeedDist(minRotSpeed, maxRotSpeed);
 	float maxRadiusChange = 0.6f;
 
 	const Color colors[] = { Colors::Red,Colors::Blue,Colors::Cyan,Colors::Yellow,Colors::Magenta,Colors::Green };
@@ -162,7 +166,7 @@ void Game::generateStars()
 			continue;
 		}
 			const Color c = colors[colorSampler(_rng)];
-			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), c,colorFreqDist(_rng), phaseDist(_rng), scaleOffsetDist(_rng), maxRadiusChange));
+			_stars.emplace_back(Star(pos, outerRad,innerRatio,pointsDist(_rng), c,colorFreqDist(_rng), phaseDist(_rng), scaleOffsetDist(_rng), maxRadiusChange, rotationSpeedDist(_rng)));
 	}
 
 }
