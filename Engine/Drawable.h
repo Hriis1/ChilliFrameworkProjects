@@ -14,12 +14,7 @@ public:
 	void scaleIndependent(float scaleX_in, float scaleY_in);
 	void scaleX(float scaleX_in);
 	void scaleY(float scaleY_in);
-	void rotate(float angle_in)
-	{
-		_angle += angle_in;
-		_translation.Rotate(angle_in);
-	}
-
+	void Rotate(float angle);
 
 	void Render(Graphics& gfx);
 private:

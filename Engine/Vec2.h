@@ -35,9 +35,9 @@ public:
 		const T cosTheta = cos(angle);
 		const T sinTheta = sin(angle);
 
-		const T new_x = _x * cosTheta - _y * sinTheta;
+		const T newX = _x * cosTheta - _y * sinTheta;
 		_y = _x * sinTheta + _y * cosTheta;
-		_x = new_x;
+		_x = newX;
 
 		return *this;
 	}
