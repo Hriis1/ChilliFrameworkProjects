@@ -20,6 +20,7 @@ public:
 		_time += deltaTime;
 		UpdateColor();
 		UpdateScale();
+		UpdateRotation();
 	}
 
 	//getters
@@ -55,6 +56,11 @@ private:
 	{
 		float offset = (sin(_time + _scaleOffset)) * _maxChange;
 		setScale(1.0f + offset);
+	}
+
+	void UpdateRotation()
+	{
+		setAngle(_rotationSpeed * _time);
 	}
 private:
 	float _radius;
