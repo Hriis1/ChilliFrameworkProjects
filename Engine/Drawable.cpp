@@ -37,8 +37,15 @@ void Drawable::scaleY(float scaleY_in)
 	_translation._y *= scaleY_in;
 }
 
+void Drawable::Rotate(float angle)
+{
+	_angle += angle;
+	_translation.Rotate(angle);
+}
+
+
 void Drawable::Render(Graphics& gfx)
 {
 
-	gfx.drawPolyLine(*_model,_translation,_scaleX, _scaleY, _color);
+	gfx.drawPolyLine(*_model,_translation,_scaleX, _scaleY, _angle, _color);
 }
