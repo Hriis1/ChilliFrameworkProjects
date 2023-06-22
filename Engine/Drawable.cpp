@@ -46,5 +46,5 @@ void Drawable::rotate(float angle_in)
 void Drawable::Render(Graphics& gfx)
 {
 
-	gfx.drawPolyLine(*_model,_translation,_scaleX, _scaleY, 0, _color);
+	gfx.drawPolyLine(*_model,_translation,_scaleX, _scaleY, _angle, _color);
 }
