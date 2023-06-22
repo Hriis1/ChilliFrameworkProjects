@@ -366,7 +366,7 @@ void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, Color c)
 	drawLine(verts.back(), verts.front(), c);
 }
 
-void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, const Vec2<float>& translation, float scaleX, float scaleY, Color c)
+void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, const Vec2<float>& translation, float scaleX, float scaleY, float angle, Color c)
 {
 	const auto xform = [&](Vec2<float> v)
 	{
