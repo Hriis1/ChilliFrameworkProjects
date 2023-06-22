@@ -30,6 +30,18 @@ public:
 	{
 	}
 
+	Vec2& Rotate(T angle)
+	{
+		const T cosTheta = cos(angle);
+		const T sinTheta = sin(angle);
+
+		const T newX = _x * cosTheta - _y * sinTheta;
+		_y = _x * sinTheta + _y * cosTheta;
+		_x = newX;
+
+		return *this;
+	}
+
 	Vec2& normalize()
 	{
 		*this = getNormalized();
@@ -51,6 +63,11 @@ public:
 			return *this;
 
 		return *this * ((T)1/ len);
+	}
+
+	Vec2 getRotated(T angle) const
+	{
+		return Vec2<T>(*this).Rotate(angle);
 	}
 
 	Vec2 getRotatedPositive90Degrees() const
