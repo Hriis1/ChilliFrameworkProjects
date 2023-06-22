@@ -34,7 +34,7 @@ public:
 		return _scale;
 	}
 
-	virtual Drawable getDrawable()
+	Drawable getDrawable() const
 	{
 		 Drawable drawable(_model, _color);
 		 drawable.scale(_scale);
