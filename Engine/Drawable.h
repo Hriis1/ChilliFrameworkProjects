@@ -14,12 +14,6 @@ public:
 	void scaleIndependent(float scaleX_in, float scaleY_in);
 	void scaleX(float scaleX_in);
 	void scaleY(float scaleY_in);
-	void rotate(float angle_in)
-	{
-		_angle += angle_in;
-		_translation.Rotate(angle_in);
-	}
-
 
 	void Render(Graphics& gfx);
 private:
@@ -27,7 +21,6 @@ private:
 	Vec2<float> _translation = {0.0f, 0.0f};
 	float _scaleX = 1.0f;
 	float _scaleY = 1.0f;
-	float _angle = 0.0f;
 	Color _color;
 };
 
