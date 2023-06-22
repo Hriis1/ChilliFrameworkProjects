@@ -37,6 +37,11 @@ void Drawable::scaleY(float scaleY_in)
 	_translation._y *= scaleY_in;
 }
 
+void Drawable::rotate(float angle_in)
+{
+	_angle += angle_in;
+}
+
 void Drawable::Render(Graphics& gfx)
 {
 
