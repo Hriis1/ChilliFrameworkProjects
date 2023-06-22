@@ -42,6 +42,7 @@ public:
 	Drawable getDrawable() const
 	{
 		 Drawable drawable(_model, _color);
+		 drawable.rotate(_angle);
 		 drawable.scale(_scale);
 		 drawable.translate(_pos);
 		 return drawable;
