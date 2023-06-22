@@ -373,10 +373,14 @@ void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, const Vec2<fl
 
 	const auto xform = [&](Vec2<float> v)
 	{
+		//Rotate
 		v.Rotate(sinTheta, cosTheta);
+		//Scale
 		v._x *= scaleX;
 		v._y *= scaleY;
+		//Translate
 		v += translation;
+
 		return v;
 	};
 
