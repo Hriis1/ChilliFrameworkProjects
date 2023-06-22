@@ -65,5 +65,7 @@ private:
 	SpawnPoint _sPoint;
 	Plank _plank;
 	std::vector<Ball> _balls;
+	std::vector<Vec2<float>> _star;
+	float _t = 0.0f;
 
 };

@@ -44,6 +44,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	const float deltaTime = _ft.Mark();
+	_t += deltaTime;
 	updateCamera();
 
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
@@ -92,9 +93,14 @@ void Game::UpdateModel()
 		{
 			ballIter++;
 		}
+	}
 
-		
-		
+	_star = ShapeMaker::makeStar(150.0f, 60.0f);
+	const float theta = _t * PI;
+
+	for (auto& vert : _star)
+	{
+		vert.Rotate(theta);
 	}
 	
 }
@@ -110,6 +116,9 @@ void Game::ComposeFrame()
 		Drawable ballDrawable = ballIter->getDrawable();
 		_camera.draw(ballDrawable);
 	}
+
+	Drawable starDrawable = Drawable(_star, Colors::Yellow);
+	_camera.draw(starDrawable);
 }
 
 void Game::updateCamera()
