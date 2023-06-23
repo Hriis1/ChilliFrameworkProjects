@@ -21,7 +21,7 @@ void CameraControler::update(float deltaTime)
 	{
 		_cam.setAngle(_cam.getAngle() + _rotationSpeed * deltaTime);
 	}
-	if (_wnd.kbd.KeyIsPressed('E'))
+	else if (_wnd.kbd.KeyIsPressed('E'))
 	{
 		_cam.setAngle(_cam.getAngle() - _rotationSpeed * deltaTime);
 	}
@@ -29,18 +29,38 @@ void CameraControler::update(float deltaTime)
 	const float cameraSpeed = 3.0f;
 	if (_wnd.kbd.KeyIsPressed('S'))
 	{
-		_cam.moveBy(Vec2<float>(0.0f, -cameraSpeed));
+		Vec2<float> moveVec = {0.0f, -cameraSpeed};
+
+		//rotate the moveVec with -_angle to counteract the camera rotation
+		moveVec.Rotate(-_cam.getAngle());
+
+		_cam.moveBy(moveVec);
 	}
 	if (_wnd.kbd.KeyIsPressed('W'))
 	{
-		_cam.moveBy(Vec2<float>(0.0f, cameraSpeed));
+		Vec2<float> moveVec = { 0.0f, cameraSpeed };
+
+		//rotate the moveVec with -_angle to counteract the camera rotation
+		moveVec.Rotate(-_cam.getAngle());
+
+		_cam.moveBy(moveVec);
 	}
 	if (_wnd.kbd.KeyIsPressed('A'))
 	{
-		_cam.moveBy(Vec2<float>(-cameraSpeed, 0.0f));
+		Vec2<float> moveVec = { -cameraSpeed, 0.0f };
+
+		//rotate the moveVec with -_angle to counteract the camera rotation
+		moveVec.Rotate(-_cam.getAngle());
+
+		_cam.moveBy(moveVec);
 	}
 	if (_wnd.kbd.KeyIsPressed('D'))
 	{
-		_cam.moveBy(Vec2<float>(cameraSpeed, 0.0f));
+		Vec2<float> moveVec = { cameraSpeed, 0.0f };
+
+		//rotate the moveVec with -_angle to counteract the camera rotation
+		moveVec.Rotate(-_cam.getAngle());
+
+		_cam.moveBy(moveVec);
 	}
 }
