@@ -17,7 +17,14 @@ void CameraControler::update(float deltaTime)
 			_cam.setScale(_cam.getScale() * 0.9f);
 	}
 
-
+	if (_wnd.kbd.KeyIsPressed('Q'))
+	{
+		_cam.setAngle(_cam.getAngle() + _rotationSpeed * deltaTime);
+	}
+	if (_wnd.kbd.KeyIsPressed('E'))
+	{
+		_cam.setAngle(_cam.getAngle() - _rotationSpeed * deltaTime);
+	}
 
 	const float cameraSpeed = 3.0f;
 	if (_wnd.kbd.KeyIsPressed('S'))

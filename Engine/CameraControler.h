@@ -1,6 +1,7 @@
 #pragma once
 #include "MainWindow.h"
 #include "Camera.h"
+#include "MathKEK.h"
 
 class CameraControler
 {
@@ -9,6 +10,7 @@ public:
 
 	void update(float deltaTime);
 private:
+	static constexpr float _rotationSpeed = PI / 6.0f;
 	MainWindow& _wnd;
 	Camera& _cam;
 };
