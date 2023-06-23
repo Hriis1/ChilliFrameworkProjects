@@ -1,6 +1,7 @@
 #pragma once
 #include "CoordinateTransformer.h"
 #include "RectF.h"
+#include "MathKEK.h"
 class Camera
 {
 public:
@@ -30,7 +31,10 @@ public:
 	{
 		const float zoom = 1.0f / _scale;
 
-		return RectF::fromCenter(_pos, float(Graphics::ScreenWidth / 2.0f) * zoom, float(Graphics::ScreenHeight / 2.0f) * zoom);
+		//Get the rect surrounding the circle made from rotating the original viewportRect(has to be done because of rotation)
+		const float diagonalLen = sqrt(sq(float(Graphics::ScreenWidth / 2.0f) * zoom) + sq(float(Graphics::ScreenHeight / 2.0f) * zoom));
+
+		return RectF::fromCenter(_pos, diagonalLen, diagonalLen);
 	}
 
 	//setters
