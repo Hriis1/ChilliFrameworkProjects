@@ -13,6 +13,40 @@ public:
 		return Vec2<T>{ cells[0][0] * vec._x + cells[0][1] * vec._y,  cells[1][0] * vec._x + cells[1][1] * vec._y };
 	}
 
+	//static
+	static Mat2<T> identity()
+	{
+		return scale((T)1);
+	}
+
+	static Mat2<T> flipY()
+	{
+		return Mat2<T> {
+			(T)1, (T)0,
+			(T)0, (T)-1
+		};
+	}
+
+	static Mat2<T> scale(T factor)
+	{
+		return Mat2<T> {
+			factor, (T)0,
+			(T)0,    factor
+		};
+	}
+
+	static Mat2<T> rotation(T theta)
+	{
+		const auto sinTheta = sin(theta);
+		const auto cosTheta = cos(theta);
+		return Mat2<T> {
+			(T)cosTheta, -(T)sinTheta,	
+			(T)sinTheta, (T)cosTheta
+		};
+	}
+
+	
+
 public:
 	//[row][col]
 	T cells[2][2];
