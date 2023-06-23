@@ -21,6 +21,10 @@ public:
 	{
 		return _scale;
 	}
+	float getAngle() const
+	{
+		return _angle;
+	}
 
 	RectF getViewportRect() const
 	{
@@ -34,9 +38,15 @@ public:
 	{
 		_scale = s;
 	}
+
+	void setAngle(float a)
+	{
+		_angle = a;
+	}
 private:
 	Vec2<float> _pos = {0.0f, 0.0f};
 	float _scale = 1.0f;
+	float _angle;
 	CoordinateTransformer& _ct;
 
 };

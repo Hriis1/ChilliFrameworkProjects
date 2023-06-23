@@ -19,5 +19,6 @@ void Camera::draw(Drawable& drawable)
 {
 	drawable.translate(-_pos);
 	drawable.scale(_scale);
+	drawable.rotate(_angle);
 	_ct.draw(drawable);
 }
