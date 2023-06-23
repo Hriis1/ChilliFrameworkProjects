@@ -22,6 +22,7 @@
 #include "Game.h"
 #include "Shapes.h"
 #include "MathKEK.h"
+#include "Mat2.h"
 
 Game::Game(MainWindow& wnd)
 	:
@@ -30,14 +31,6 @@ Game::Game(MainWindow& wnd)
 	_rng(std::random_device()()),_coordTrans(gfx), _camera(_coordTrans),
 	_camControl(wnd, _camera)
 {
-	/*_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(460.0f, 0.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(150.0f, 300.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(250.0f, -200.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(-250.0f, 200.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(0.0f, 0.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(200.0f, 50.0f), Vec2<float>(-150.0f, -300.0f));
-	_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(400.0f, 300.0f));*/
-
 	generateStars();
 }
 
@@ -51,25 +44,6 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	/*const int speed = 3;
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		_e1.translateBy({0, -speed});
-	}
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		_e1.translateBy({0, speed});
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		_e1.translateBy({-speed, 0});
-	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		_e1.translateBy({speed, 0 });
-	}
-	*/
-
 	const float deltaTime = _ft.Mark();
 	_camControl.update(deltaTime);
 
