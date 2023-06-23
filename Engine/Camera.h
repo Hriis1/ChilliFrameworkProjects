@@ -31,7 +31,7 @@ public:
 	{
 		const float zoom = 1.0f / _scale;
 
-		//Get the rect surrounding the circle made from rotating the original viewportRect(has to be done because of rotation)
+		//Get the rect surrounding the circle made from rotating the original viewportRect(guarantied to see all the visible stars regardles of rotation)
 		const float diagonalLen = sqrt(sq(float(Graphics::ScreenWidth / 2.0f) * zoom) + sq(float(Graphics::ScreenHeight / 2.0f) * zoom));
 
 		return RectF::fromCenter(_pos, diagonalLen, diagonalLen);
