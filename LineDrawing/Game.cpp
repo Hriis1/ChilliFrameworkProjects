@@ -27,7 +27,8 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	_rng(std::random_device()()),_coordTrans(gfx), _camera(_coordTrans)
+	_rng(std::random_device()()),_coordTrans(gfx), _camera(_coordTrans),
+	_camControl(wnd, _camera)
 {
 	/*_entities.emplace_back(ShapeMaker::makeStar(100.0f, 50.0f), Vec2<float>(460.0f, 0.0f));
 	_entities.emplace_back(ShapeMaker::makeStar(150.0f, 50.0f), Vec2<float>(150.0f, 300.0f));
@@ -70,35 +71,7 @@ void Game::UpdateModel()
 	*/
 
 	const float deltaTime = _ft.Mark();
-	while (!wnd.mouse.IsEmpty())
-	{
-		const auto e = wnd.mouse.Read();
-
-		if (e.GetType() == Mouse::Event::Type::WheelUp)
-			_camera.setScale(_camera.getScale() * 1.1f);
-		else if(e.GetType() == Mouse::Event::Type::WheelDown)
-			_camera.setScale(_camera.getScale() * 0.9f);
-	}
-	
-	
-
-	const float cameraSpeed = 3.0f;
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		_camera.moveBy(Vec2<float>(0.0f, -cameraSpeed));
-	}
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		_camera.moveBy(Vec2<float>(0.0f, cameraSpeed));
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		_camera.moveBy(Vec2<float>(-cameraSpeed, 0.0f));
-	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		_camera.moveBy(Vec2<float>(cameraSpeed, 0.0f));
-	}
+	_camControl.update(deltaTime);
 
 	for (auto& star : _stars)
 	{

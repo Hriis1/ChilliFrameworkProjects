@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraControler.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraControler.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="DXErr.cpp" />

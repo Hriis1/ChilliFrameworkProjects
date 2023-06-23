@@ -28,6 +28,7 @@
 #include "CoordinateTransformer.h"
 #include "Camera.h"
 #include "FrameTimer.h"
+#include "CameraControler.h"
 
 #include "Entity.h"
 #include "Plank.h"
@@ -49,7 +50,6 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-	void updateCamera();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
@@ -61,6 +61,7 @@ private:
 	FrameTimer _ft;
 	CoordinateTransformer _coordTrans;
 	Camera _camera;
+	CameraControler _camControl;
 
 	SpawnPoint _sPoint;
 	Plank _plank;

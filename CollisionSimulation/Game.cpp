@@ -27,8 +27,8 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
+	_coordTrans(gfx), _camera(_coordTrans), _camControl(wnd, _camera),
 	_sPoint(_balls, 20.0f, {-100.0f, -200.0f}, -2.0f, 0.5f, 2.0f, 0.5f),
-	_coordTrans(gfx), _camera(_coordTrans),
 	_plank({ 0.0f,200.0f }, -380.0f, -100.0f, 290.0f)
 {
 }
@@ -45,7 +45,7 @@ void Game::UpdateModel()
 {
 	const float deltaTime = _ft.Mark();
 	_t += deltaTime;
-	updateCamera();
+	_camControl.update(deltaTime);
 
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
@@ -119,37 +119,4 @@ void Game::ComposeFrame()
 
 	Drawable starDrawable = Drawable(_star, Colors::Yellow);
 	_camera.draw(starDrawable);
-}
-
-void Game::updateCamera()
-{
-	while (!wnd.mouse.IsEmpty())
-	{
-		const auto e = wnd.mouse.Read();
-
-		if (e.GetType() == Mouse::Event::Type::WheelUp)
-			_camera.setScale(_camera.getScale() * 1.1f);
-		else if (e.GetType() == Mouse::Event::Type::WheelDown)
-			_camera.setScale(_camera.getScale() * 0.9f);
-	}
-
-
-
-	/*const float cameraSpeed = 3.0f;
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		_camera.moveBy(Vec2<float>(0.0f, -cameraSpeed));
-	}
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		_camera.moveBy(Vec2<float>(0.0f, cameraSpeed));
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		_camera.moveBy(Vec2<float>(-cameraSpeed, 0.0f));
-	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		_camera.moveBy(Vec2<float>(cameraSpeed, 0.0f));
-	}*/
 }

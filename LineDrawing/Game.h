@@ -30,6 +30,7 @@
 #include "Star.h"
 #include "Camera.h"
 #include "FrameTimer.h"
+#include "CameraControler.h"
 
 class Game
 {
@@ -55,9 +56,9 @@ private:
 	FrameTimer _ft;
 	CoordinateTransformer _coordTrans;
 	Camera _camera;
+	CameraControler _camControl;
+
+
 	std::vector<Star> _stars;
 	std::mt19937 _rng;
-
-
-	Vec2<float> lastMousePos = { 0.0f, 0.0f };
 };
