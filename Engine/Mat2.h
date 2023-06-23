@@ -13,10 +13,9 @@ public:
 		return Vec2<T>{ cells[0][0] * vec._x + cells[0][1] * vec._y,  cells[1][0] * vec._x + cells[1][1] * vec._y };
 	}
 
-	Mat2<T> operator*(const Mat2<T>& rhs) const
+	Mat2 operator*(const Mat2& rhs) const
 	{
-		Mat2<T> out;
-
+		Mat2 out;
 		for (int row_left = 0; row_left < 2; row_left++)
 		{
 			for (int col_right = 0; col_right < 2; col_right++)
@@ -28,9 +27,7 @@ public:
 				}
 			}
 		}
-
 		return out;
-		
 	}
 
 	Mat2<T>& operator*=(const Mat2<T>& rhs) const
@@ -44,11 +41,11 @@ public:
 		return scale((T)1);
 	}
 
-	static Mat2<T> FlipY()
+	static Mat2 FlipY()
 	{
-		return Mat2<T> {
-			(T)1, (T)0,
-			(T)0, (T)-1
+		return {
+			(T)1,	(T)0,
+			(T)0,	(T)-1
 		};
 	}
 

@@ -74,11 +74,11 @@ void Game::ComposeFrame()
 	const Mat2<float> transformation1 = Mat2<float>::Rotation(0.3f);
 	const Mat2<float> transformation2 = Mat2<float>::Scale(2.0f);
 	const Mat2<float> transformation3 = Mat2<float>::FlipY();
+	Mat2<float> transformCat = transformation3 * transformation2 * transformation1;
+	//transformCat = transformCat * transformation3;
 	for (auto& v : star)
 	{
-		v = transformation1 * v;
-		v = transformation2 * v;
-		v = transformation3 * v;
+		v = transformCat * v;
 	}
 	Drawable dr = Drawable{ star, Colors::Green };
 	_camera.draw(dr);
