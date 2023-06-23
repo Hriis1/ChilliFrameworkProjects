@@ -13,6 +13,31 @@ public:
 		return Vec2<T>{ cells[0][0] * vec._x + cells[0][1] * vec._y,  cells[1][0] * vec._x + cells[1][1] * vec._y };
 	}
 
+	Mat2<T> operator*(const Mat2<T>& rhs) const
+	{
+		Mat2<T> out;
+
+		for (int row_left = 0; row_left < 2; row_left++)
+		{
+			for (int col_right = 0; col_right < 2; col_right++)
+			{
+				out.cells[row_left][col_right] = (T)0;
+				for (int i = 0; i < 2; i++)
+				{
+					out.cells[row_left][col_right] += cells[row_left][i] * rhs.cells[i][col_right];
+				}
+			}
+		}
+
+		return out;
+		
+	}
+
+	Mat2<T>& operator*=(const Mat2<T>& rhs) const
+	{
+		return *this = *this * rhs;
+	}
+
 	//static
 	static Mat2<T> Identity()
 	{
