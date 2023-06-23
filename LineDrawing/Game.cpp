@@ -58,6 +58,7 @@ void Game::ComposeFrame()
 	/*if(wnd.mouse.LeftIsPressed())
 		gfx.drawLine(Vec2<float>(100, 100), Vec2<float>(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::White);*/
 
+	
 	const auto viewPort = _camera.getViewportRect();
 	for (const auto& e : _stars)
 	{
@@ -67,6 +68,20 @@ void Game::ComposeFrame()
 		if(viewPort.isOverlappingWith(e.getBoundingRect()))
 			_camera.draw(dr);
 	}
+	
+
+	auto star = ShapeMaker::makeStar(100.0f, 50.0f);
+	const Mat2<float> transformation1 = Mat2<float>::Rotation(0.3f);
+	const Mat2<float> transformation2 = Mat2<float>::Scale(2.0f);
+	const Mat2<float> transformation3 = Mat2<float>::FlipY();
+	for (auto& v : star)
+	{
+		v = transformation1 * v;
+		v = transformation2 * v;
+		v = transformation3 * v;
+	}
+	Drawable dr = Drawable{ star, Colors::Green };
+	_camera.draw(dr);
 }
 
 

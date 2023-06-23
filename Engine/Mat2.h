@@ -14,12 +14,12 @@ public:
 	}
 
 	//static
-	static Mat2<T> identity()
+	static Mat2<T> Identity()
 	{
 		return scale((T)1);
 	}
 
-	static Mat2<T> flipY()
+	static Mat2<T> FlipY()
 	{
 		return Mat2<T> {
 			(T)1, (T)0,
@@ -27,7 +27,7 @@ public:
 		};
 	}
 
-	static Mat2<T> scale(T factor)
+	static Mat2<T> Scale(T factor)
 	{
 		return Mat2<T> {
 			factor, (T)0,
@@ -35,7 +35,7 @@ public:
 		};
 	}
 
-	static Mat2<T> rotation(T theta)
+	static Mat2<T> Rotation(T theta)
 	{
 		const auto sinTheta = sin(theta);
 		const auto cosTheta = cos(theta);
