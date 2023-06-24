@@ -40,11 +40,6 @@ public:
 		return out;
 	}
 
-	Mat3<T>& operator*=(const Mat3<T>& rhs)
-	{
-		return *this = *this * rhs;
-	}
-
 	//static
 	static Mat3<T> Identity()
 	{

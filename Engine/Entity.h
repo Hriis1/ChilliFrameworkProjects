@@ -43,9 +43,10 @@ public:
 	{
 		 Drawable drawable(_model, _color);
 		 drawable.applyTransformation(
+			 Mat3<float>::Translation(_pos._x, _pos._y) * 
 			 Mat3<float>::Scale(_scale) *
-			 Mat3<float>::Rotation(_angle) *
-			 Mat3<float>::Translation(_pos._x, _pos._y)
+			 Mat3<float>::Rotation(_angle)
+			 
 		 );
 		 return drawable;
 	}

@@ -15,8 +15,9 @@ public:
 	{
 		const Vec2<float> offset = { float(Graphics::ScreenWidth / 2),float(Graphics::ScreenHeight / 2) };
 		drawable.applyTransformation(
-			Mat3<float>::ScaleIndependent(1.0f, -1.0f) *
-			Mat3<float>::Translation(offset._x, offset._y)
+			Mat3<float>::Translation(offset._x, offset._y) *
+			Mat3<float>::ScaleIndependent(1.0f, -1.0f)
+			
 		);
 		drawable.Render(_gfx);
 	}
