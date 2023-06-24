@@ -4,6 +4,7 @@
 
 #include "Vec2.h"
 
+//This class always has the _w component set to 1 - it should only be used for 2d, it isn't actually a vector with 3 modifiable components
 template<typename T>
 class Vec3
 {
