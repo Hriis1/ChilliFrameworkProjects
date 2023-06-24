@@ -154,6 +154,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Mat2.h" />
+    <ClInclude Include="Mat3.h" />
     <ClInclude Include="MathKEK.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Plank.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="Vec3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />

@@ -22,7 +22,7 @@
 #include "Game.h"
 #include "Shapes.h"
 #include "MathKEK.h"
-#include "Mat2.h"
+#include "Mat3.h"
 
 Game::Game(MainWindow& wnd)
 	:
@@ -71,14 +71,14 @@ void Game::ComposeFrame()
 	
 
 	auto star = ShapeMaker::makeStar(100.0f, 50.0f);
-	const Mat2<float> transformation1 = Mat2<float>::Rotation(0.3f);
-	const Mat2<float> transformation2 = Mat2<float>::Scale(2.0f);
-	const Mat2<float> transformation3 = Mat2<float>::FlipY();
-	Mat2<float> transformCat = transformation3 * transformation2 * transformation1;
-	//transformCat = transformCat * transformation3;
+	const Mat3<float> transformation1 = Mat3<float>::Rotation(0.3f);
+	const Mat3<float> transformation2 = Mat3<float>::Scale(2.0f);
+	const Mat3<float> transformation3 = Mat3<float>::FlipY();
+	const Mat3<float> transformation4 = Mat3<float>::Translation(100.0f, 100.0f);
+	Mat3<float> transformCat = transformation4 * transformation3 * transformation2 * transformation1;
 	for (auto& v : star)
 	{
-		v = transformCat * v;
+		v = Vec2<float>(transformCat * (Vec3<float>)v);
 	}
 	Drawable dr = Drawable{ star, Colors::Green };
 	_camera.draw(dr);
@@ -117,7 +117,7 @@ void Game::generateStars()
 
 	while(_stars.size() < 100)
 	{
-		Vec2<float> pos = Vec2<float>(xDist(_rng), yDist(_rng));
+		Vec2<float> pos = Vec2<float>((float)xDist(_rng), (float)yDist(_rng));
 		float outerRad = outerRDist(_rng);
 		float innerRatio = innerRatioDist(_rng);
 
