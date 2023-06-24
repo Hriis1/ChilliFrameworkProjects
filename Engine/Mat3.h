@@ -8,6 +8,11 @@ class Mat3
 public:
 
 	//operators
+	Vec2<T> operator*(const Vec2<T>& vec) const
+	{
+		return operator Vec2<T>(*this * (Vec3<T>)v);
+	}
+
 	Vec3<T> operator*(const Vec3<T>& vec) const
 	{
 		Vec3<T> vout; 
