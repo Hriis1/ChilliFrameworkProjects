@@ -26,6 +26,8 @@
 #include <string>
 #include <array>
 
+#include "Mat3.h"
+
 // Ignore the intellisense error "cannot open source file" for .shh files.
 // They will be created during the build sequence before the preprocessor runs.
 namespace FramebufferShaders
@@ -366,30 +368,14 @@ void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, Color c)
 	drawLine(verts.back(), verts.front(), c);
 }
 
-void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, const Vec2<float>& translation, float scaleX, float scaleY, float angle, Color c)
+void Graphics::drawPolyLine(const std::vector<Vec2<float>>& verts, Mat3<float> transform, Color c)
 {
-	const float sinTheta = sin(angle);
-	const float cosTheta = cos(angle);
-
-	const auto xform = [&](Vec2<float> v)
-	{
-		//Rotate
-		v.Rotate(sinTheta, cosTheta);
-		//Scale
-		v._x *= scaleX;
-		v._y *= scaleY;
-		//Translate
-		v += translation;
-
-		return v;
-	};
-
-	const Vec2<float> front = xform(verts.front());
+	const Vec2<float> front = transform * verts.front();
 	Vec2<float> cur = front;
 
 	for (size_t i = 0; i < verts.size() - 1; i++)
 	{
-		const Vec2<float> next = xform(verts[i+1]);
+		const Vec2<float> next = transform * verts[i+1];
 		drawLine(cur, next, c);
 		cur = next;
 	}

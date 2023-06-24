@@ -5,46 +5,12 @@ Drawable::Drawable(const std::vector<Vec2<float>>& model, Color c)
 {
 }
 
-void Drawable::translate(const Vec2<float>& translation_in)
+void Drawable::applyTransformation(const Mat3<float>& transformation_in)
 {
-	_translation += translation_in;
-}
-
-void Drawable::scale(float scale_in)
-{
-	_scaleX *= scale_in;
-	_scaleY *= scale_in;
-	_translation *= scale_in;
-}
-
-void Drawable::scaleIndependent(float scaleX_in, float scaleY_in)
-{
-	_scaleX *= scaleX_in;
-	_scaleY *= scaleY_in;
-	_translation._x *= scaleX_in;
-	_translation._y *= scaleY_in;
-}
-
-void Drawable::scaleX(float scaleX_in)
-{
-	_scaleX *= scaleX_in;
-	_translation._x *= scaleX_in;
-}
-
-void Drawable::scaleY(float scaleY_in)
-{
-	_scaleY *= scaleY_in;
-	_translation._y *= scaleY_in;
-}
-
-void Drawable::rotate(float angle_in)
-{
-	_angle += angle_in;
-	_translation.Rotate(angle_in);
+	_transformation *= transformation_in;
 }
 
 void Drawable::Render(Graphics& gfx)
 {
-
-	gfx.drawPolyLine(*_model,_translation,_scaleX, _scaleY, _angle, _color);
+	gfx.drawPolyLine(*_model, _transformation, _color);
 }

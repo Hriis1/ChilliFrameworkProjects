@@ -65,23 +65,9 @@ void Game::ComposeFrame()
 		Drawable dr = e.getDrawable();
 
 		//Draw only the objects that are visible by the camera
-		if(viewPort.isOverlappingWith(e.getBoundingRect()))
+		if (viewPort.isOverlappingWith(e.getBoundingRect()))
 			_camera.draw(dr);
 	}
-	
-
-	auto star = ShapeMaker::makeStar(100.0f, 50.0f);
-	const Mat3<float> transformation1 = Mat3<float>::Rotation(0.3f);
-	const Mat3<float> transformation2 = Mat3<float>::Scale(2.0f);
-	const Mat3<float> transformation3 = Mat3<float>::FlipY();
-	const Mat3<float> transformation4 = Mat3<float>::Translation(100.0f, 100.0f);
-	Mat3<float> transformCat = transformation4 * transformation3 * transformation2 * transformation1;
-	for (auto& v : star)
-	{
-		v = Vec2<float>(transformCat * (Vec3<float>)v);
-	}
-	Drawable dr = Drawable{ star, Colors::Green };
-	_camera.draw(dr);
 }
 
 

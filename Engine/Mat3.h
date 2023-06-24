@@ -10,7 +10,7 @@ public:
 	//operators
 	Vec2<T> operator*(const Vec2<T>& vec) const
 	{
-		return operator Vec2<T>(*this * (Vec3<T>)v);
+		return Vec2<T>(*this * (Vec3<T>)vec);
 	}
 
 	Vec3<T> operator*(const Vec3<T>& vec) const
@@ -23,7 +23,7 @@ public:
 		return vout;
 	}
 
-	Mat3 operator*(const Mat3& rhs) const
+	Mat3 operator*(const Mat3<T>& rhs) const
 	{
 		Mat3 out;
 		for (int row_left = 0; row_left < 3; row_left++)
@@ -40,7 +40,7 @@ public:
 		return out;
 	}
 
-	Mat3<T>& operator*=(const Mat3<T>& rhs) const
+	Mat3<T>& operator*=(const Mat3<T>& rhs)
 	{
 		return *this = *this * rhs;
 	}
@@ -48,7 +48,7 @@ public:
 	//static
 	static Mat3<T> Identity()
 	{
-		return scale((T)1);
+		return Scale((T)1);
 	}
 
 	static Mat3 FlipY()
@@ -66,6 +66,15 @@ public:
 			factor, (T)0, (T)0,
 			(T)0, factor, (T)0,
 			(T)0, (T)0,   (T)1
+		};
+	}
+
+	static Mat3<T> ScaleIndependent(T x, T y)
+	{
+		return Mat3<T> {
+			 x,   (T)0,  (T)0,
+			(T)0,  y,    (T)0,
+			(T)0, (T)0,  (T)1
 		};
 	}
 

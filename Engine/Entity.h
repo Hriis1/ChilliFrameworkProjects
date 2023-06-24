@@ -42,9 +42,11 @@ public:
 	Drawable getDrawable() const
 	{
 		 Drawable drawable(_model, _color);
-		 drawable.rotate(_angle);
-		 drawable.scale(_scale);
-		 drawable.translate(_pos);
+		 drawable.applyTransformation(
+			 Mat3<float>::Scale(_scale) *
+			 Mat3<float>::Rotation(_angle) *
+			 Mat3<float>::Translation(_pos._x, _pos._y)
+		 );
 		 return drawable;
 	}
 
