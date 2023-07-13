@@ -11,7 +11,7 @@ class Box : public Entity
 {
 public:
 	Box(Vec2<float> pos, float width, float height, BODYTYPE bodyType = BODYTYPE::RIGID, Color c = Colors::Red)
-		: Entity(ShapeMaker::makeRectangle(width, height), pos, c), rect(pos, width, height), _bodyType(bodyType)
+		: Entity(ShapeMaker::makeRectangle(width, height), pos, c), _rect(pos, width, height), _bodyType(bodyType)
 	{
 
 	}
@@ -23,9 +23,13 @@ public:
 
 		}
 	}
+	
+	//getters
+	const RectF& getRect() const { return _rect; }
+	
 
 protected:
-	RectF rect;
+	RectF _rect;
 	BODYTYPE _bodyType;
 	
 };

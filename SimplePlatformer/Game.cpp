@@ -19,8 +19,11 @@
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #include "MainWindow.h"
+#include <Windows.h>
+
 #include "Game.h"
 #include "Shapes.h"
+
 
 Game::Game(MainWindow& wnd)
 	:
@@ -46,6 +49,9 @@ void Game::UpdateModel()
 	const float deltaTime = _ft.Mark();
 	//_camControl.update(deltaTime);
 	_player.update(deltaTime);
+
+
+	//Collision
 	
 }
 
