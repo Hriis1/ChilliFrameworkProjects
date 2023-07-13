@@ -33,6 +33,7 @@
 #include "CameraControler.h"
 
 #include "Box.h"
+#include "Player.h"
 
 class Game
 {
@@ -64,5 +65,6 @@ private:
 
 
 	Box _box;
+	Player _player;
 
 };

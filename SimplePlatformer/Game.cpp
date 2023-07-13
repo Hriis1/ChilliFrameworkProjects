@@ -27,7 +27,8 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	_coordTrans(gfx), _camera(_coordTrans), _camControl(wnd, _camera),
-	_box({50.0f,50.0f}, 170.0f, 40.0f)
+	_box({0.0f,0.0f}, 170.0f, 40.0f), 
+	_player({100.0f,100.0f},wnd)
 {
 
 }
@@ -43,7 +44,8 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	const float deltaTime = _ft.Mark();
-	_camControl.update(deltaTime);
+	//_camControl.update(deltaTime);
+	_player.update(deltaTime);
 	
 }
 
@@ -51,6 +53,9 @@ void Game::ComposeFrame()
 {
 	Drawable boxDr = _box.getDrawable();
 	_camera.draw(boxDr);
+
+	Drawable playerDr = _player.getDrawable();
+	_camera.draw(playerDr);
 }
 
 void Game::updateCamera()

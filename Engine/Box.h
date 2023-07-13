@@ -5,10 +5,7 @@
 
 #include "RectF.h"
 
-enum class BODYTYPE
-{
-	STATIC, RIGID, DYNAMIC
-};
+
 
 class Box : public Entity
 {
@@ -19,7 +16,7 @@ public:
 
 	}
 
-	void update(float deltaTime)
+	virtual void update(float deltaTime)
 	{
 		if (_bodyType == BODYTYPE::DYNAMIC) //only update if it is a dynamic box
 		{
@@ -27,7 +24,7 @@ public:
 		}
 	}
 
-private:
+protected:
 	RectF rect;
 	BODYTYPE _bodyType;
 	

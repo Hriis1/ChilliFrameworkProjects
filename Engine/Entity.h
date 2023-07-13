@@ -4,6 +4,11 @@
 #include "Vec2.h"
 #include "Drawable.h"
 
+enum class BODYTYPE
+{
+	STATIC, RIGID, DYNAMIC
+};
+
 class Entity
 {
 public:
