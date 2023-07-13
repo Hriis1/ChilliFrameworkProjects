@@ -5,16 +5,30 @@
 
 #include "RectF.h"
 
+enum class BODYTYPE
+{
+	STATIC, RIGID, DYNAMIC
+};
+
 class Box : public Entity
 {
 public:
-	Box(Vec2<float> pos, float width, float height, Color c = Colors::Red)
-		: Entity(ShapeMaker::makeRectangle(width, height), pos, c), rect(pos, width, height)
+	Box(Vec2<float> pos, float width, float height, BODYTYPE bodyType = BODYTYPE::RIGID, Color c = Colors::Red)
+		: Entity(ShapeMaker::makeRectangle(width, height), pos, c), rect(pos, width, height), _bodyType(bodyType)
 	{
 
 	}
 
+	void update(float deltaTime)
+	{
+		if (_bodyType == BODYTYPE::DYNAMIC) //only update if it is a dynamic box
+		{
+
+		}
+	}
+
 private:
 	RectF rect;
+	BODYTYPE _bodyType;
 	
 };
