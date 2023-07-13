@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CollisionSimulation", "Coll
 		{FFCA512B-49FC-4FC8-8A73-C4F87D322FF2} = {FFCA512B-49FC-4FC8-8A73-C4F87D322FF2}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimplePlatformer", "SimplePlatformer\SimplePlatformer.vcxproj", "{B9A0853B-742C-4626-BA62-5BF892DA4CB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -47,6 +49,14 @@ Global
 		{3F34FE67-6E74-4175-A3A7-232EA5370F80}.Release|x64.Build.0 = Release|x64
 		{3F34FE67-6E74-4175-A3A7-232EA5370F80}.Release|x86.ActiveCfg = Release|Win32
 		{3F34FE67-6E74-4175-A3A7-232EA5370F80}.Release|x86.Build.0 = Release|Win32
+		{B9A0853B-742C-4626-BA62-5BF892DA4CB3}.Debug|x64.ActiveCfg = Debug|x64
+		{B9A0853B-742C-4626-BA62-5BF892DA4CB3}.Debug|x64.Build.0 = Debug|x64
+		{B9A0853B-742C-4626-BA62-5BF892DA4CB3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B9A0853B-742C-4626-BA62-5BF892DA4CB3}.Debug|x86.Build.0 = Debug|Win32
+		{B9A0853B-742C-4626-BA62-5BF892DA4CB3}.Release|x64.ActiveCfg = Release|x64
+		{B9A0853B-742C-4626-BA62-5BF892DA4CB3}.Release|x64.Build.0 = Release|x64
+		{B9A0853B-742C-4626-BA62-5BF892DA4CB3}.Release|x86.ActiveCfg = Release|Win32
+		{B9A0853B-742C-4626-BA62-5BF892DA4CB3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

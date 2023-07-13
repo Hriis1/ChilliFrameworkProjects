@@ -22,6 +22,8 @@ public:
 
 	//getters
 	Vec2<float> getCenter() const { return Vec2<float>((left + right)/2.0f, (top + bot)/2.0f); }
+	float getWidth() const { return abs(right - left); }
+	float getHeight() const { return abs(top - bot);   }
 public:
 	float left = 0.0f;
 	float right = 0.0f;

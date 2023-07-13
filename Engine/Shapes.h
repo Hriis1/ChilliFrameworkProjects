@@ -20,4 +20,15 @@ public:
 		}
 		return star;
 	}
+
+	static std::vector<Vec2<float>> makeRectangle(float width, float height)
+	{
+		std::vector<Vec2<float>> rect;
+		rect.emplace_back(0.0f, 0.0f);
+		rect.emplace_back(width, 0.0f);
+		rect.emplace_back(width, height);
+		rect.emplace_back(0.0f, height);
+		
+		return rect;
+	}
 };
