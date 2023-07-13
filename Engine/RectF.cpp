@@ -15,6 +15,14 @@ RectF::RectF(const Vec2<float>& topLeft, float width, float height)
 {
 }
 
+void RectF::moveBy(const Vec2<float>& amount)
+{
+	left += amount._x;
+	right += amount._x;
+	top += amount._y;
+	bot += amount._y;
+}
+
 bool RectF::isOverlappingWith(const RectF& other) const
 {
 	return right >= other.left && left <= other.right && bot >=other.top && top <= other.bot;

@@ -8,6 +8,8 @@ public:
 	RectF(const Vec2<float>& topLeft, const Vec2<float>& botRight);
 	RectF(const Vec2<float>& topLeft, float width, float height);
 
+	void moveBy(const Vec2<float>& amount);
+
 	bool isOverlappingWith(const RectF& other) const;
 	bool isContainedBy(const RectF& other) const;
 

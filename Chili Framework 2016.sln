@@ -16,6 +16,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CollisionSimulation", "Coll
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimplePlatformer", "SimplePlatformer\SimplePlatformer.vcxproj", "{B9A0853B-742C-4626-BA62-5BF892DA4CB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FFCA512B-49FC-4FC8-8A73-C4F87D322FF2} = {FFCA512B-49FC-4FC8-8A73-C4F87D322FF2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

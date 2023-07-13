@@ -52,6 +52,13 @@ void Game::UpdateModel()
 
 
 	//Collision
+	const RectF& playerRect = _player.getRect();
+	const RectF& boxRect = _box.getRect();
+
+	if (playerRect.isOverlappingWith(boxRect))
+	{
+		OutputDebugStringA("Player is colliding with the box\n");
+	}
 	
 }
 
