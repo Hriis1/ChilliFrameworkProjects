@@ -25,15 +25,21 @@ void RectF::moveBy(const Vec2<float>& amount)
 
 bool RectF::isOverlappingWith(const RectF& other) const
 {
-	return right >= other.left && left <= other.right && bot >=other.top && top <= other.bot;
+	return right >= other.left && left <= other.right && ((bot >=other.top && top <= other.bot) || (bot <= other.top && top >= other.bot)); //this handles both Y cases seperetrly
 }
 
-bool RectF::isContainedBy(const RectF& other) const
+bool RectF::isContainedBy(const RectF& other, YMODE yMode) const
 {
-	return left >= other.left && right <= other.right && top >= other.top && bot <= other.bot;
+	if(yMode == YMODE::INVERTED)
+		return left >= other.left && right <= other.right && top >= other.top && bot <= other.bot; 
+	else
+		return left >= other.left && right <= other.right && top <= other.top && bot >= other.bot;
 }
 
-RectF RectF::getExpanded(float offset) const
+RectF RectF::getExpanded(float offset, YMODE yMode) const
 {
-	return RectF(left - offset, right + offset, top - offset, bot + offset);
+	if (yMode == YMODE::INVERTED)
+		return RectF(left - offset, right + offset, top - offset, bot + offset);
+	else
+		return RectF(left - offset, right + offset, top + offset, bot - offset);
 }

@@ -3,23 +3,32 @@
 class RectF
 {
 public:
+	enum class YMODE
+	{
+		INVERTED, STANDARD
+	};
+
 	RectF() = default;
 	RectF(float left_, float right_, float top_, float bot_);
 	RectF(const Vec2<float>& topLeft, const Vec2<float>& botRight);
-	RectF(const Vec2<float>& topLeft, float width, float height);
+	RectF(const Vec2<float>& topLeft, float width, float height); //Only used for rects which Y coordinate goes up as the rect goes down
 
 	void moveBy(const Vec2<float>& amount);
 
 	bool isOverlappingWith(const RectF& other) const;
-	bool isContainedBy(const RectF& other) const;
+	bool isContainedBy(const RectF& other, YMODE yMode = YMODE::INVERTED) const;
 
-	RectF getExpanded(float offset) const;
+	RectF getExpanded(float offset, YMODE yMode = YMODE::INVERTED) const;
 
 	//static
-	static RectF fromCenter(const Vec2<float>& center, float halfWidth, float halfHeight)
+	static RectF fromCenter(const Vec2<float>& center, float halfWidth, float halfHeight, YMODE yMode = YMODE::INVERTED)
 	{
 		const Vec2<float> half(halfWidth, halfHeight);
-		return RectF(center - half, center + half);
+
+		if (yMode == YMODE::INVERTED)
+			return RectF(center - half, center + half);
+		else
+			return RectF(Vec2<float>(center._x - half._x, center._y + half._y), Vec2<float>(center._x + half._x, center._y - half._y));
 	}
 
 	//getters
