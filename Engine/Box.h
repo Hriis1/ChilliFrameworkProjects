@@ -11,7 +11,7 @@ class Box : public Entity
 {
 public:
 	Box(Vec2<float> pos, float width, float height, BODYTYPE bodyType = BODYTYPE::RIGID, Color c = Colors::Red)
-		: Entity(ShapeMaker::makeRectangle(width, height), pos, c), _rect(pos, width, height), _bodyType(bodyType)
+		: Entity(ShapeMaker::makeRectangle(width, height), pos, c), _rect(Vec2<float>(pos._x, pos._y + height), Vec2<float>(pos._x + width, pos._y)), _bodyType(bodyType)
 	{
 
 	}
