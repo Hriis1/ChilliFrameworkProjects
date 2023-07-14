@@ -3,10 +3,14 @@
 class RectF
 {
 public:
+	enum class RECTF_POSITION_MODE
+	{
+		SCREEN_POS, COORD_SYSTEM_POS
+	};
 	RectF() = default;
-	RectF(float left_, float right_, float top_, float bot_);
-	RectF(const Vec2<float>& topLeft, const Vec2<float>& botRight);
-	RectF(const Vec2<float>& topLeft, float width, float height);
+	RectF(float left_, float right_, float top_, float bot_, RECTF_POSITION_MODE mode = RECTF_POSITION_MODE::SCREEN_POS);
+	RectF(const Vec2<float>& topLeft, const Vec2<float>& botRight, RECTF_POSITION_MODE mode = RECTF_POSITION_MODE::SCREEN_POS);
+	RectF(const Vec2<float>& topLeft, float width, float height, RECTF_POSITION_MODE mode = RECTF_POSITION_MODE::SCREEN_POS);
 
 	void moveBy(const Vec2<float>& amount);
 
@@ -31,5 +35,8 @@ public:
 	float right = 0.0f;
 	float top = 0.0f;
 	float bot = 0.0f;
+
+private:
+	RECTF_POSITION_MODE _mode;
 };
 
