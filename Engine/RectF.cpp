@@ -1,18 +1,17 @@
 #include "RectF.h"
 
-RectF::RectF(float left_, float right_, float top_, float bot_, RECTF_POSITION_MODE mode)
-	: left(left_), right(right_), top(top_), bot(bot_), _mode(mode)
-
+RectF::RectF(float left_, float right_, float top_, float bot_)
+	: left(left_), right(right_), top(top_), bot(bot_)
 {
 }
 
-RectF::RectF(const Vec2<float>& topLeft, const Vec2<float>& botRight, RECTF_POSITION_MODE mode)
-	: RectF(topLeft._x, botRight._x, topLeft._y, botRight._y, mode)
+RectF::RectF(const Vec2<float>& topLeft, const Vec2<float>& botRight)
+	: RectF(topLeft._x, botRight._x, topLeft._y, botRight._y)
 {
 }
 
-RectF::RectF(const Vec2<float>& topLeft, float width, float height, RECTF_POSITION_MODE mode)
-	: RectF(topLeft._x, topLeft._x + width, topLeft._y, topLeft._y + height, mode)
+RectF::RectF(const Vec2<float>& topLeft, float width, float height)
+	: RectF(topLeft._x, topLeft._x + width, topLeft._y, topLeft._y + height)
 {
 }
 

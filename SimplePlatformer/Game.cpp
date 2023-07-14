@@ -33,6 +33,7 @@ Game::Game(MainWindow& wnd)
 	_box({0.0f,0.0f}, 170.0f, 40.0f), 
 	_player({100.0f,100.0f},wnd)
 {
+
 }
 
 void Game::Go()
