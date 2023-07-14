@@ -17,46 +17,14 @@ class Player : public Box
 public:
 	Player(Vec2<float> pos, MainWindow& wnd):
 		_wnd(wnd),
-		Box(pos, PLAYER_WIDTH, PLAYER_HEIGHT, BODYTYPE::DYNAMIC, Colors::Blue)
-	{
+		Box(pos, PLAYER_WIDTH, PLAYER_HEIGHT, BODYTYPE::DYNAMIC, Colors::Blue) {}
 
-	}
-
-	void update(float deltaTime) override
-	{
-		if (_wnd.kbd.KeyIsPressed('S'))
-		{
-			Vec2<float> moveAmount = Vec2<float>(0, -PLAYER_SPEED * deltaTime);
-			Vec2<float> newPos = getPos() + moveAmount;
-			setPos(newPos);
-			_rect.moveBy(moveAmount);
-		}
-		if (_wnd.kbd.KeyIsPressed('W'))
-		{
-			Vec2<float> moveAmount = Vec2<float>(0, PLAYER_SPEED * deltaTime);
-			Vec2<float> newPos = getPos() + moveAmount;
-			setPos(newPos);
-			_rect.moveBy(moveAmount);
-		}
-		if (_wnd.kbd.KeyIsPressed('A'))
-		{
-			Vec2<float> moveAmount = Vec2<float>(-PLAYER_SPEED * deltaTime, 0);
-			Vec2<float> newPos = getPos() + moveAmount;
-			setPos(newPos);
-			_rect.moveBy(moveAmount);
-		}
-		if (_wnd.kbd.KeyIsPressed('D'))
-		{
-			Vec2<float> moveAmount = Vec2<float>(PLAYER_SPEED * deltaTime, 0);
-			Vec2<float> newPos = getPos() + moveAmount;
-			setPos(newPos);
-			_rect.moveBy(moveAmount);
-		}
-	}
+	void update(float deltaTime) override;
 
 private:
-	
 
+	void updateMovement(float deltaTime);
+private:
 	MainWindow& _wnd;
 };
 
