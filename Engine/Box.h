@@ -23,6 +23,33 @@ public:
 
 		}
 	}
+
+	void collideWithBox(Box* other)
+	{
+		if (_bodyType == BODYTYPE::STATIC) //static boxes dont need collision handling
+			return;
+
+
+		if (_bodyType == BODYTYPE::RIGID)
+		{
+			if (other->_bodyType == BODYTYPE::DYNAMIC) //1st box is rigid 2nd is dynamic
+			{
+
+			}
+		}
+		else if (_bodyType == BODYTYPE::DYNAMIC)
+		{
+			if (other->_bodyType == BODYTYPE::DYNAMIC) //both boxes are dynamic
+			{
+				//TODO maybe
+			}
+			else if (other->_bodyType == BODYTYPE::RIGID) //1st box is dynamic 2nd is rigid
+			{
+
+			}
+		}
+		
+	}
 	
 	//getters
 	const RectF& getRect() const { return _rect; }
