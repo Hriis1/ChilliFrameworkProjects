@@ -2,6 +2,7 @@
 
 void Player::update(float deltaTime)
 {
+	Box::update(deltaTime);
 	updateMovement(deltaTime);
 }
 

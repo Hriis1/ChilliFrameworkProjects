@@ -6,7 +6,7 @@
 #include "RectF.h"
 
 
-
+constexpr float GRAVITY_PULL = 7.0f;
 class Box : public Entity
 {
 public:
@@ -20,7 +20,10 @@ public:
 	{
 		if (_bodyType == BODYTYPE::DYNAMIC) //only update if it is a dynamic box
 		{
-
+			if (getPos()._y >= -100.0f)
+			{
+				setPos(getPos() + Vec2<float>(0.0f, -GRAVITY_PULL));
+			}
 		}
 	}
 
@@ -58,5 +61,8 @@ public:
 protected:
 	RectF _rect;
 	BODYTYPE _bodyType;
+
+
+	bool grounded = false;
 	
 };
