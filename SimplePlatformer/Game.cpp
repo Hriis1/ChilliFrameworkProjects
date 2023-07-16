@@ -30,7 +30,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	_coordTrans(gfx), _camera(_coordTrans), _camControl(wnd, _camera),
-	_box({250.0f,0.0f}, 70.0f, 40.0f), 
+	_box({-600.0f,-140.0f}, 1200.0f, 40.0f), 
 	_player({100.0f,100.0f},wnd)
 {
 
@@ -49,10 +49,13 @@ void Game::UpdateModel()
 	const float deltaTime = _ft.Mark();
 	//_camControl.update(deltaTime);
 	_player.update(deltaTime);
+	_player.collideWithBox(&_box);
 
 
 	//Collision
 	const RectF& playerRect = _player.getRect();
+	Vec2<float> playerPos = _player.getPos();
+
 	const RectF& boxRect = _box.getRect();
 
 	if (playerRect.isOverlappingWith(boxRect))

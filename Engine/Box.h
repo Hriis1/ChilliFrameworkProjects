@@ -30,25 +30,36 @@ public:
 			return;
 
 
-		if (_bodyType == BODYTYPE::RIGID)
+		if (_rect.isOverlappingWith(other->_rect)) //check for collision
 		{
-			if (other->_bodyType == BODYTYPE::DYNAMIC) //1st box is rigid 2nd is dynamic
-			{
 
+			if (_bodyType == BODYTYPE::RIGID)
+			{
+				if (other->_bodyType == BODYTYPE::DYNAMIC) //1st box is rigid 2nd is dynamic
+				{
+
+				}
+			}
+			else if (_bodyType == BODYTYPE::DYNAMIC)
+			{
+				if (other->_bodyType == BODYTYPE::DYNAMIC) //both boxes are dynamic
+				{
+					//TODO maybe
+				}
+				else if (other->_bodyType == BODYTYPE::RIGID) //1st box is dynamic 2nd is rigid
+				{
+					if (_velocity._y < 0.0f || _rect.bot == other->_rect.top) //coming from the top
+					{
+						_velocity._y = 0.0f;
+
+						Vec2<float> newPos = Vec2<float>(getPos()._x, other->_rect.top);
+						_rect.moveBy(newPos - getPos());
+						setPos(newPos);
+						_grounded = true;
+					}
+				}
 			}
 		}
-		else if (_bodyType == BODYTYPE::DYNAMIC)
-		{
-			if (other->_bodyType == BODYTYPE::DYNAMIC) //both boxes are dynamic
-			{
-				//TODO maybe
-			}
-			else if (other->_bodyType == BODYTYPE::RIGID) //1st box is dynamic 2nd is rigid
-			{
-
-			}
-		}
-		
 	}
 	
 	//getters
@@ -57,7 +68,7 @@ public:
 private:
 	void updatePosition()
 	{
-		if (getPos()._y >= -100.0f)
+		/*if (getPos()._y >= -100.0f)
 		{
 			_grounded = false;
 
@@ -66,7 +77,7 @@ private:
 		{
 			_grounded = true;
 			_velocity._y = 0.0f;
-		}
+		}*/
 
 		if (!_grounded)
 			_velocity._y += GRAVITY_PULL;
