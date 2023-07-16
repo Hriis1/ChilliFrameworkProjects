@@ -9,6 +9,8 @@ enum class BODYTYPE
 	STATIC, RIGID, DYNAMIC
 };
 
+constexpr float GRAVITY_PULL = -0.1f;
+
 class Entity
 {
 public:

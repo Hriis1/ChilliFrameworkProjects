@@ -6,7 +6,7 @@
 #include "RectF.h"
 
 
-constexpr float GRAVITY_PULL = -0.1f;
+
 class Box : public Entity
 {
 public:
