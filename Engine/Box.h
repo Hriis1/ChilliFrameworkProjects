@@ -20,22 +20,7 @@ public:
 	{
 		if (_bodyType == BODYTYPE::DYNAMIC) //only update if it is a dynamic box
 		{
-			if (getPos()._y >= -100.0f)
-			{
-				_grounded = false;
-				
-			}
-			else
-			{
-				_grounded = true;
-				_velocity._y = 0.0f;
-			}
-
-			if (!_grounded)
-				_velocity._y += GRAVITY_PULL;
-
-			//update pos based on velocity
-			setPos(getPos() + _velocity);
+			updatePosition();
 		}
 	}
 
@@ -69,6 +54,29 @@ public:
 	//getters
 	const RectF& getRect() const { return _rect; }
 	
+private:
+	void updatePosition()
+	{
+		if (getPos()._y >= -100.0f)
+		{
+			_grounded = false;
+
+		}
+		else
+		{
+			_grounded = true;
+			_velocity._y = 0.0f;
+		}
+
+		if (!_grounded)
+			_velocity._y += GRAVITY_PULL;
+
+		//update pos based on velocity
+		setPos(getPos() + _velocity);
+
+		//update the rects position
+		_rect.moveBy(_velocity);
+	}
 
 protected:
 	RectF _rect;
