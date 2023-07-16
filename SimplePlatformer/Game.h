@@ -64,7 +64,7 @@ private:
 
 
 
-	Box _box;
+	std::vector<Box> _boxes;
 	Player _player;
 
 };

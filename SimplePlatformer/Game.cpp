@@ -30,10 +30,11 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	_coordTrans(gfx), _camera(_coordTrans), _camControl(wnd, _camera),
-	_box({-600.0f,-140.0f}, 800.0f, 40.0f), 
 	_player({100.0f,100.0f},wnd)
 {
-
+	_boxes.emplace_back(Vec2<float>(-600.0f, -140.0f), 800.0f, 40.0f);
+	_boxes.emplace_back(Vec2<float>(180.0f, -100.0f), 50.0f, 100.0f, BODYTYPE::RIGID, Colors::Green);
+	_boxes.emplace_back(Vec2<float>(-80.0f, -100.0f), 50.0f, 100.0f, BODYTYPE::RIGID, Colors::Green);
 }
 
 void Game::Go()
@@ -49,14 +50,19 @@ void Game::UpdateModel()
 	const float deltaTime = _ft.Mark();
 	//_camControl.update(deltaTime);
 	_player.update(deltaTime);
-	_player.collideWithBox(&_box);
+
+	for (size_t i = 0; i < _boxes.size(); i++)
+	{
+		_player.collideWithBox(&_boxes[i]);
+	}
+	
 
 
 	//Collision
 	const RectF& playerRect = _player.getRect();
 	Vec2<float> playerPos = _player.getPos();
 
-	const RectF& boxRect = _box.getRect();
+	const RectF& boxRect = _boxes[0].getRect();
 
 	if (playerRect.isOverlappingWith(boxRect))
 	{
@@ -67,8 +73,11 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	Drawable boxDr = _box.getDrawable();
-	_camera.draw(boxDr);
+	for (size_t i = 0; i < _boxes.size(); i++)
+	{
+		Drawable boxDr = _boxes[i].getDrawable();
+		_camera.draw(boxDr);
+	}
 
 	Drawable playerDr = _player.getDrawable();
 	_camera.draw(playerDr);

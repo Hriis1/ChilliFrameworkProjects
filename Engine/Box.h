@@ -48,15 +48,49 @@ public:
 				}
 				else if (other->_bodyType == BODYTYPE::RIGID) //1st box is dynamic 2nd is rigid
 				{
-					if (_velocity._y < 0.0f || _rect.bot == other->_rect.top) //coming from the top
-					{
-						_velocity._y = 0.0f;
+					float horizontalDistance = std::min(std::abs(_rect.right - other->_rect.left),
+						std::abs(_rect.left - other->_rect.right));
 
-						Vec2<float> newPos = Vec2<float>(getPos()._x, other->_rect.top);
-						_rect.moveBy(newPos - getPos());
-						setPos(newPos);
-						_grounded = true;
+					float verticalDistance = std::min(std::abs(_rect.bot - other->_rect.top),
+						std::abs(_rect.top - other->_rect.bot));
+					
+					if (horizontalDistance < verticalDistance) {
+						// Resolve horizontal collision
+						float box1CenterX = _rect.left + (_rect.getWidth() / 2.0f);
+						float box2CenterX = other->_rect.left + (other->_rect.getWidth() / 2.0f);
+						if (_velocity._x > 0.0f && box1CenterX < box2CenterX) //coming from the left
+						{
+							Vec2<float> moveAmount = { other->_rect.left - _rect.right, 0.0f };
+
+							setPos(getPos() + moveAmount);
+							_rect.moveBy(moveAmount);
+						}
+						else if(_velocity._x < 0.0f && box1CenterX > box2CenterX) {
+							Vec2<float> moveAmount = { other->_rect.right - _rect.left, 0.0f};
+							setPos(getPos() + moveAmount);
+							_rect.moveBy(moveAmount);
+						}
+						_velocity._x = 0.0f;
 					}
+					else {
+						// Resolve vertical collision
+						if ((_velocity._y < 0.0f || _rect.bot == other->_rect.top)) //coming from the top
+						{
+							_velocity._y = 0.0f;
+
+							Vec2<float> newPos = Vec2<float>(getPos()._x, other->_rect.top);
+							_rect.moveBy(newPos - getPos());
+							setPos(newPos);
+							_grounded = true;
+						}
+						else {
+							_velocity._y = 0.0f;
+							Vec2<float> newPos = Vec2<float>(getPos()._x, other->_rect.bot - _rect.getHeight());
+							_rect.moveBy(newPos - getPos());
+							setPos(newPos);
+						}
+					}
+					
 				}
 			}
 		}
@@ -72,17 +106,6 @@ public:
 private:
 	void updatePosition()
 	{
-		/*if (getPos()._y >= -100.0f)
-		{
-			_grounded = false;
-
-		}
-		else
-		{
-			_grounded = true;
-			_velocity._y = 0.0f;
-		}*/
-
 		if (!_grounded)
 			_velocity._y += GRAVITY_PULL;
 

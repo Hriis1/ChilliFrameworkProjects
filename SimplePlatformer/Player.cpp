@@ -2,8 +2,9 @@
 
 void Player::update(float deltaTime)
 {
-	Box::update(deltaTime);
 	updateMovement(deltaTime);
+	Box::update(deltaTime);
+	
 }
 
 void Player::updateMovement(float deltaTime)
@@ -27,17 +28,15 @@ void Player::updateMovement(float deltaTime)
 	{
 		if (_wnd.kbd.KeyIsPressed('A'))
 		{
-			Vec2<float> moveAmount = Vec2<float>(-PLAYER_SPEED * deltaTime, 0);
-			Vec2<float> newPos = getPos() + moveAmount;
-			setPos(newPos);
-			_rect.moveBy(moveAmount);
+			_velocity._x = -PLAYER_SPEED * deltaTime;
 		}
 		if (_wnd.kbd.KeyIsPressed('D'))
 		{
-			Vec2<float> moveAmount = Vec2<float>(PLAYER_SPEED * deltaTime, 0);
-			Vec2<float> newPos = getPos() + moveAmount;
-			setPos(newPos);
-			_rect.moveBy(moveAmount);
+			_velocity._x = PLAYER_SPEED * deltaTime;
 		}
+	}
+	else
+	{
+		_velocity._x = 0.0f;
 	}
 }
