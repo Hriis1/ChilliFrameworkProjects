@@ -58,14 +58,14 @@ public:
 						// Resolve horizontal collision
 						float box1CenterX = _rect.left + (_rect.getWidth() / 2.0f);
 						float box2CenterX = other->_rect.left + (other->_rect.getWidth() / 2.0f);
-						if (_velocity._x > 0.0f && box1CenterX < box2CenterX) //coming from the left
+						if (box1CenterX < box2CenterX) //coming from the left
 						{
 							Vec2<float> moveAmount = { other->_rect.left - _rect.right, 0.0f };
 
 							setPos(getPos() + moveAmount);
 							_rect.moveBy(moveAmount);
 						}
-						else if(_velocity._x < 0.0f && box1CenterX > box2CenterX) {
+						else if(box1CenterX > box2CenterX) {
 							Vec2<float> moveAmount = { other->_rect.right - _rect.left, 0.0f};
 							setPos(getPos() + moveAmount);
 							_rect.moveBy(moveAmount);
