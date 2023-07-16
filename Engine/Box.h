@@ -6,7 +6,7 @@
 #include "RectF.h"
 
 
-constexpr float GRAVITY_PULL = 7.0f;
+constexpr float GRAVITY_PULL = -0.1f;
 class Box : public Entity
 {
 public:
@@ -22,8 +22,20 @@ public:
 		{
 			if (getPos()._y >= -100.0f)
 			{
-				setPos(getPos() + Vec2<float>(0.0f, -GRAVITY_PULL));
+				_grounded = false;
+				
 			}
+			else
+			{
+				_grounded = true;
+				_velocity._y = 0.0f;
+			}
+
+			if (!_grounded)
+				_velocity._y += GRAVITY_PULL;
+
+			//update pos based on velocity
+			setPos(getPos() + _velocity);
 		}
 	}
 
@@ -63,6 +75,7 @@ protected:
 	BODYTYPE _bodyType;
 
 
-	bool grounded = false;
+	bool _grounded = false;
+	Vec2<float> _velocity = { 0.0f, 0.0f };
 	
 };
