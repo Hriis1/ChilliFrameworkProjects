@@ -60,6 +60,10 @@ public:
 				}
 			}
 		}
+		else //set grounded to false if not colliding with anything
+		{
+			_grounded = false;
+		}
 	}
 	
 	//getters

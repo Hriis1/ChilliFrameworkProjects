@@ -30,7 +30,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	_coordTrans(gfx), _camera(_coordTrans), _camControl(wnd, _camera),
-	_box({-600.0f,-140.0f}, 1200.0f, 40.0f), 
+	_box({-600.0f,-140.0f}, 800.0f, 40.0f), 
 	_player({100.0f,100.0f},wnd)
 {
 
