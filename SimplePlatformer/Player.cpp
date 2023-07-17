@@ -39,4 +39,12 @@ void Player::updateMovement(float deltaTime)
 	{
 		_velocity._x = 0.0f;
 	}
+
+
+	//Jumping
+	if (_wnd.kbd.KeyIsPressed(VK_SPACE) && _grounded)
+	{
+		_velocity._y = 5.0f;
+		_grounded = false;
+	}
 }

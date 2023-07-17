@@ -5,6 +5,9 @@ void Box::update(float deltaTime)
 	if (_bodyType == BODYTYPE::DYNAMIC) //only update if it is a dynamic box
 	{
 		updatePosition();
+
+		//set grounded to false after each update so collisin can change it back to true if nececery
+		_grounded = false;
 	}
 }
 
@@ -36,10 +39,6 @@ void Box::collideWithBox(Box* other)
 			}
 		}
 	}
-	else
-	{
-		_grounded = false;
-	}
 }
 
 void Box::handleDynamicToRigidBoxCollision(Box* other)
@@ -67,7 +66,6 @@ void Box::handleDynamicToRigidBoxCollision(Box* other)
 			_rect.moveBy(moveAmount);
 		}
 		_velocity._x = 0.0f;
-		_grounded = false;
 	}
 	else {
 		// Resolve vertical collision
@@ -78,6 +76,8 @@ void Box::handleDynamicToRigidBoxCollision(Box* other)
 			Vec2<float> newPos = Vec2<float>(getPos()._x, other->_rect.top);
 			_rect.moveBy(newPos - getPos());
 			setPos(newPos);
+			
+			//Only set grounded to true if the box is colliding with a box below it
 			_grounded = true;
 		}
 		else {
@@ -85,7 +85,6 @@ void Box::handleDynamicToRigidBoxCollision(Box* other)
 			Vec2<float> newPos = Vec2<float>(getPos()._x, other->_rect.bot - _rect.getHeight());
 			_rect.moveBy(newPos - getPos());
 			setPos(newPos);
-			_grounded = false;
 		}
 	}
 }

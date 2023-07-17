@@ -24,6 +24,13 @@ public:
 	
 	//getters
 	const RectF& getRect() const { return _rect; }
+
+
+	//setters
+	void setGrounded(bool grounded_in)
+	{
+		_grounded = grounded_in;
+	}
 	
 private:
 	void handleDynamicToRigidBoxCollision(Box* other);
