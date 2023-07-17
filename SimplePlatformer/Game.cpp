@@ -33,7 +33,7 @@ Game::Game(MainWindow& wnd)
 	_player({100.0f,100.0f},wnd)
 {
 	_boxes.emplace_back(Vec2<float>(-600.0f, -140.0f), 800.0f, 40.0f);
-	_boxes.emplace_back(Vec2<float>(180.0f, -100.0f), 50.0f, 100.0f, BODYTYPE::RIGID, Colors::Green);
+	//_boxes.emplace_back(Vec2<float>(180.0f, -100.0f), 50.0f, 100.0f, BODYTYPE::RIGID, Colors::Green);
 	_boxes.emplace_back(Vec2<float>(-80.0f, -100.0f), 50.0f, 100.0f, BODYTYPE::RIGID, Colors::Green);
 }
 

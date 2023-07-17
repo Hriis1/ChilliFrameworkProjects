@@ -36,7 +36,7 @@ void Box::collideWithBox(Box* other)
 			}
 		}
 	}
-	else //set grounded to false if not colliding with anything
+	else
 	{
 		_grounded = false;
 	}
@@ -67,6 +67,7 @@ void Box::handleDynamicToRigidBoxCollision(Box* other)
 			_rect.moveBy(moveAmount);
 		}
 		_velocity._x = 0.0f;
+		_grounded = false;
 	}
 	else {
 		// Resolve vertical collision
@@ -84,6 +85,7 @@ void Box::handleDynamicToRigidBoxCollision(Box* other)
 			Vec2<float> newPos = Vec2<float>(getPos()._x, other->_rect.bot - _rect.getHeight());
 			_rect.moveBy(newPos - getPos());
 			setPos(newPos);
+			_grounded = false;
 		}
 	}
 }
