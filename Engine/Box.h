@@ -26,8 +26,8 @@ public:
 	const RectF& getRect() const { return _rect; }
 	
 private:
+	void handleDynamicToRigidBoxCollision(Box* other);
 	void updatePosition();
-	
 
 protected:
 	RectF _rect;
