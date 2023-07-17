@@ -21,7 +21,7 @@ void Box::collideWithBox(Box* other)
 		{
 			if (other->_bodyType == BODYTYPE::DYNAMIC) //1st box is rigid 2nd is dynamic
 			{
-
+				other->handleDynamicToRigidBoxCollision(this);
 			}
 		}
 		else if (_bodyType == BODYTYPE::DYNAMIC)
